@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace TaskManager.AppLayer
 {
-    class CommandArgumentPattern
+    public class CommandArgumentPattern
     {
         public CommandPatternType Type { get; }
         public List<string> AvaliableArguments { get; private set; }

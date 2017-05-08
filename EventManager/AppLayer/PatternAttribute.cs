@@ -2,7 +2,7 @@
 
 namespace TaskManager.AppLayer
 {
-    class PatternAttribute: Attribute
+    public class PatternAttribute: Attribute
     {
         public CommandArgumentPattern Pattern { get; }
         public PatternAttribute(string pattern)

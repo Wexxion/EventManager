@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace TaskManager.AppLayer
 {
-    class BaseCommand
+    public class BaseCommand
     {
         public string Name { get; }
         public CommandType Type { get; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TaskManager.DomainLibs
 {
-    class Location
+    public class Location
     {
         public double Latitide { get; }
         public double Longtitude { get; }

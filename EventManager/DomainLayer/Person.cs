@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TaskManager.DomainLibs
 {
-    class Person
+    public class Person
     {
         public int Id { get; }
         public string FirstName { get; }

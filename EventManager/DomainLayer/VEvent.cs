@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TaskManager.DomainLibs
 {
-    class VEvent
+    public class VEvent
     {
         public int Id { get; }
         public Person Creator { get; }
