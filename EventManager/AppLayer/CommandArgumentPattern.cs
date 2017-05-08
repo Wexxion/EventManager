@@ -23,7 +23,9 @@ namespace TaskManager.AppLayer
 
         public CommandArgumentPattern(string pattern)
         {
-            
+            //TODO fix this to normal parser
+            Type = CommandPatternType.AnyString;
+            AvaliableArguments = new List<string> {pattern};
         }
 
         public void AddArgument(string argument)
