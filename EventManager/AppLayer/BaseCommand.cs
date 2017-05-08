@@ -30,7 +30,7 @@ namespace TaskManager.AppLayer
             foreach (var action in OnExecute)
                 action();
             //TODO -> смотреть ключи словаря методов и сравнивать с ними список аргументов -> получать метод
-            this.MethodsDict[new CommandArgumentPattern("не нью, а ключ словаря! (туду)")]
+            MethodsDict[new CommandArgumentPattern("не нью, а ключ словаря! (туду)")]
                 .Invoke(this, new object[] {arguments});
         }
 

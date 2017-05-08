@@ -12,13 +12,13 @@ namespace TaskManager.AppLayer
 
         public CommandArgumentPattern(CommandPatternType type)
         {
-            this.Type = type;
+            Type = type;
         }
 
         public CommandArgumentPattern(List<string> avaliableArguments)
         {
-            this.Type = CommandPatternType.ListedString;
-            this.AvaliableArguments = avaliableArguments;
+            Type = CommandPatternType.ListedString;
+            AvaliableArguments = avaliableArguments;
         }
 
         public CommandArgumentPattern(string pattern)
@@ -43,8 +43,8 @@ namespace TaskManager.AppLayer
             if (ReferenceEquals(obj, this)) return true;
             if (!(obj is CommandArgumentPattern)) return false;
             var castedObject = (CommandArgumentPattern) obj;
-            var sameArgs = castedObject.AvaliableArguments.SequenceEqual(this.AvaliableArguments);
-            var sameTypes = castedObject.Type.Equals(this.Type);
+            var sameArgs = castedObject.AvaliableArguments.SequenceEqual(AvaliableArguments);
+            var sameTypes = castedObject.Type.Equals(Type);
             return sameArgs && sameTypes;
         }
 
