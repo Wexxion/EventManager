@@ -88,6 +88,7 @@
     <Compile Include="AppLayer\CommandArgumentPattern.cs" />
     <Compile Include="AppLayer\CommandPatternType.cs" />
     <Compile Include="AppLayer\CommandsTypes.cs" />
+    <Compile Include="AppLayer\PatternAttribute.cs" />
     <Compile Include="DomainLayer\Location.cs" />
     <Compile Include="DomainLayer\Person.cs" />
     <Compile Include="DomainLayer\VEvent.cs" />

@@ -21,6 +21,11 @@ namespace TaskManager.AppLayer
             this.AvaliableArguments = avaliableArguments;
         }
 
+        public CommandArgumentPattern(string pattern)
+        {
+            
+        }
+
         public void AddArgument(string argument)
         {
             if (Type != CommandPatternType.ListedString)

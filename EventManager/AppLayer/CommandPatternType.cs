@@ -8,7 +8,6 @@ namespace TaskManager.AppLayer
 {
     public enum CommandPatternType
     {
-        Empty,
         AnyString,
         ListedString
     }
