@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TaskManager.DomainLibs
+
+namespace TaskManager.DomainLayer
 {
     public class VEvent
     {

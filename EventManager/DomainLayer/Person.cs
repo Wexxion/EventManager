@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TaskManager.DomainLibs
+namespace TaskManager.DomainLayer
 {
     public class Person
     {

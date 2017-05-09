@@ -4,32 +4,38 @@ using System.Reflection;
 
 namespace TaskManager.AppLayer
 {
-    public class BaseCommand
+    public abstract class BaseCommand
     {
         public string Name { get; }
         public CommandType Type { get; }
-        public List<CommandArgumentPattern> CommandPattern { get; }
         public List<Action> OnExecute { get; }
         public Dictionary<CommandPattern, MethodBase> MethodsDict { get; }
 
-        public BaseCommand()
+        protected BaseCommand(string name)
         {
+            Name = name;
+            OnExecute = new List<Action>();
             MethodsDict = new Dictionary<CommandPattern, MethodBase>();
             var methods = GetType().GetMethods();
             foreach (var method in methods)
             {
                 var attribute = method.GetCustomAttribute(typeof(PatternAttribute)) as PatternAttribute;
                 if (attribute != null)
+                {
+                    if (method.ReturnType != typeof(string))
+                        throw new ArgumentException("Attributed method return type should be string!");
                     MethodsDict.Add(attribute.pattern, method);
+                }
             }
         }
-        public void Execute(List<string> arguments)
+        public string Execute(List<string> arguments)
         {
             foreach (var action in OnExecute)
                 action();
-            //TODO -> смотреть ключи словаря методов и сравнивать с ними список аргументов -> получать метод
-            MethodsDict[new CommandPattern("smth")]
-                .Invoke(this, new object[] {arguments});
+            foreach (var pattern in MethodsDict.Keys)
+                if (pattern.IsPatternAcceptsArguments(arguments))
+                    return (string)MethodsDict[pattern].Invoke(this, new object[] { arguments });
+            throw new ArgumentException("This command doesn't accept such arguments!");
         }
     }
 }

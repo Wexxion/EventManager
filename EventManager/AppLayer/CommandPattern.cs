@@ -32,6 +32,19 @@ namespace TaskManager.AppLayer
             }
         }
 
+        public bool IsPatternAcceptsArguments(List<string> args)
+        {
+            if (args.Count != ArgumentsPattern.Count) return false;
+            for (var i = 0; i < args.Count; i++)
+            {
+                if (ArgumentsPattern[i].Type == CommandPatternType.AnyString)
+                    continue;
+                if (!ArgumentsPattern[i].AvaliableArguments.Contains(args[i]))
+                    return false;
+            }
+            return true;
+        }
+
         public override bool Equals(object obj)
         {
             if (obj == null) return false;
