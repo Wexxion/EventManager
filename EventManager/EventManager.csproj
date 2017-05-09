@@ -81,6 +81,7 @@
   <ItemGroup>
     <Compile Include="AppLayer\BaseCommand.cs" />
     <Compile Include="AppLayer\CommandArgumentPattern.cs" />
+    <Compile Include="AppLayer\CommandPattern.cs" />
     <Compile Include="AppLayer\CommandPatternType.cs" />
     <Compile Include="AppLayer\CommandsTypes.cs" />
     <Compile Include="AppLayer\PatternAttribute.cs" />

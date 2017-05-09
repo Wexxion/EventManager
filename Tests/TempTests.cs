@@ -9,7 +9,7 @@ namespace Tests
 
     class SpecialCommand : BaseCommand
     {
-        [Pattern("some pattern")]
+        [Pattern("[listed: one, two, three] [any]")]
         public int HandleSpecialLexem(List<string> args)
         {
             return 1;
@@ -27,26 +27,24 @@ namespace Tests
         [TestMethod]
         public void ReflectionTest()
         {
-            var pattern_list = new List<string> {"one", "two", "three"};
+            var pattern_list = new List<string> {"two", "one", "three"};
             var testObject = new CommandArgumentPattern(pattern_list);
-            Assert.AreEqual(testObject, new CommandArgumentPattern(pattern_list));
+            Assert.AreEqual(testObject, new CommandArgumentPattern(new List<string> {"one", "two", "three"}));
         }
 
         [TestMethod]
         public void AttributedMethodsTest()
         {
-            var pattern = new CommandArgumentPattern("some pattern");
+            var pattern = new CommandPattern("[listed: two, one, three] [any]");
             var testingInstance = new SpecialCommand();
-            Assert.IsTrue(
-                testingInstance.MethodsDict.ContainsKey(pattern)
-            );
-
+            Assert.AreEqual(testingInstance.MethodsDict.Count, 1);
+            Assert.IsTrue(testingInstance.MethodsDict.ContainsKey(pattern));
             Assert.AreEqual(
-                testingInstance
-                .MethodsDict[pattern]
-                .Invoke(testingInstance, new object[] { new List<string> {"1"} }),
-                1
-                );
+                testingInstance.MethodsDict[pattern].Invoke(testingInstance, 
+                new object[]
+                {
+                    new List<string> {"unusable text now"}
+                }), 1);
         }
     }
 }

@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TaskManager.AppLayer
 {
     public class PatternAttribute: Attribute
     {
-        public CommandArgumentPattern Pattern { get; }
+        public CommandPattern pattern { get; }
         public PatternAttribute(string pattern)
         {
-            Pattern = new CommandArgumentPattern(pattern);
+            this.pattern = new CommandPattern(pattern);
         }
     }
 }

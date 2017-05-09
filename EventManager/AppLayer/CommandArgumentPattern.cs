@@ -13,6 +13,7 @@ namespace TaskManager.AppLayer
         public CommandArgumentPattern(CommandPatternType type)
         {
             Type = type;
+            AvaliableArguments = new List<string>();
         }
 
         public CommandArgumentPattern(List<string> avaliableArguments)
@@ -21,31 +22,14 @@ namespace TaskManager.AppLayer
             AvaliableArguments = avaliableArguments;
         }
 
-        public CommandArgumentPattern(string pattern)
-        {
-            //TODO fix this to normal parser
-            Type = CommandPatternType.AnyString;
-            AvaliableArguments = new List<string> {pattern};
-        }
-
-        public void AddArgument(string argument)
-        {
-            if (Type != CommandPatternType.ListedString)
-                throw new ArgumentException("CommandPatternType should be Listed String!");
-            AvaliableArguments.Add(argument);
-        }
-
-        public void AddArguments(List<string> arguments)
-            => AvaliableArguments = AvaliableArguments.Concat(arguments).ToList();
-
-
         public override bool Equals(object obj)
         {
             if (obj == null) return false;
             if (ReferenceEquals(obj, this)) return true;
             if (!(obj is CommandArgumentPattern)) return false;
             var castedObject = (CommandArgumentPattern) obj;
-            var sameArgs = castedObject.AvaliableArguments.SequenceEqual(AvaliableArguments);
+            var sameArgs = castedObject.AvaliableArguments.OrderBy(x => x)
+                .SequenceEqual(AvaliableArguments.OrderBy(x => x));
             var sameTypes = castedObject.Type.Equals(Type);
             return sameArgs && sameTypes;
         }
@@ -59,7 +43,7 @@ namespace TaskManager.AppLayer
         {
             unchecked
             {
-                return AvaliableArguments.Aggregate(
+                return AvaliableArguments.OrderBy(x => x).Aggregate(
                     ((int)Type * 397), 
                     (current, argument) => current ^ argument.GetHashCode()
                     );
