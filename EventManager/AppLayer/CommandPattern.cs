@@ -32,7 +32,7 @@ namespace TaskManager.AppLayer
             }
         }
 
-        public bool IsPatternAcceptsArguments(List<string> args)
+        public bool DoesPatternAcceptArguments(List<string> args)
         {
             if (args.Count != ArgumentsPattern.Count) return false;
             for (var i = 0; i < args.Count; i++)

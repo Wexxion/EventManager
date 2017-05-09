@@ -33,7 +33,7 @@ namespace TaskManager.AppLayer
             foreach (var action in OnExecute)
                 action();
             foreach (var pattern in MethodsDict.Keys)
-                if (pattern.IsPatternAcceptsArguments(arguments))
+                if (pattern.DoesPatternAcceptArguments(arguments))
                     return (string)MethodsDict[pattern].Invoke(this, new object[] { arguments });
             throw new ArgumentException("This command doesn't accept such arguments!");
         }
