@@ -6,10 +6,10 @@ namespace TaskManager.AppLayer
 {
     public class CommandPattern
     {
-        public List<CommandArgumentPattern> argumentsPattern { get; }
+        public List<CommandArgumentPattern> ArgumentsPattern { get; }
         public CommandPattern(string pattern)
         {
-            argumentsPattern = new List<CommandArgumentPattern>();
+            ArgumentsPattern = new List<CommandArgumentPattern>();
             var argsInfo = pattern
                 .Replace(" ", "")
                 .Split(new string[] {"]["}, StringSplitOptions.RemoveEmptyEntries)
@@ -21,10 +21,10 @@ namespace TaskManager.AppLayer
                 switch (argument[0])
                 {
                     case "listed":
-                        argumentsPattern.Add(new CommandArgumentPattern(argument[1].Split(',').ToList()));
+                        ArgumentsPattern.Add(new CommandArgumentPattern(argument[1].Split(',').ToList()));
                         break;
                     case "any":
-                        argumentsPattern.Add(new CommandArgumentPattern(CommandPatternType.AnyString));
+                        ArgumentsPattern.Add(new CommandArgumentPattern(CommandPatternType.AnyString));
                         break;
                     default:
                         throw new ArgumentException("Incorrect argument pattern type!");
@@ -37,22 +37,20 @@ namespace TaskManager.AppLayer
             if (obj == null) return false;
             if (ReferenceEquals(obj, this)) return true;
             var castedObj = (CommandPattern) obj;
-            for (var i = 0; i < this.argumentsPattern.Count; i++)
-                if (!argumentsPattern[i].Equals(castedObj.argumentsPattern[i]))
-                    return false;
-            return true;
+            if (ReferenceEquals(this.ArgumentsPattern, castedObj.ArgumentsPattern)) return true;
+            return ArgumentsPattern?.SequenceEqual(castedObj.ArgumentsPattern) ?? false;
         }
 
         protected bool Equals(CommandPattern other)
         {
-            return Equals(argumentsPattern, other.argumentsPattern);
+            return Equals(ArgumentsPattern, other.ArgumentsPattern);
         }
 
         public override int GetHashCode()
         {
             unchecked
             {
-                return argumentsPattern?
+                return ArgumentsPattern?
                            .Aggregate(397, (current, arg) => current ^ arg.GetHashCode())
                        ?? 0;
             }

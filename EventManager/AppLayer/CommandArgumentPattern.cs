@@ -8,7 +8,7 @@ namespace TaskManager.AppLayer
     public class CommandArgumentPattern
     {
         public CommandPatternType Type { get; }
-        public List<string> AvaliableArguments { get; private set; }
+        public List<string> AvaliableArguments { get; }
 
         public CommandArgumentPattern(CommandPatternType type)
         {
@@ -28,8 +28,10 @@ namespace TaskManager.AppLayer
             if (ReferenceEquals(obj, this)) return true;
             if (!(obj is CommandArgumentPattern)) return false;
             var castedObject = (CommandArgumentPattern) obj;
-            var sameArgs = castedObject.AvaliableArguments.OrderBy(x => x)
-                .SequenceEqual(AvaliableArguments.OrderBy(x => x));
+            if (ReferenceEquals(AvaliableArguments, castedObject.AvaliableArguments))
+                return castedObject.Type.Equals(Type);
+            var sameArgs = castedObject.AvaliableArguments?.OrderBy(x => x)
+                .SequenceEqual(AvaliableArguments.OrderBy(x => x)) ?? false;
             var sameTypes = castedObject.Type.Equals(Type);
             return sameArgs && sameTypes;
         }
