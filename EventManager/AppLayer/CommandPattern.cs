@@ -9,6 +9,7 @@ namespace TaskManager.AppLayer
         public List<CommandArgumentPattern> ArgumentsPattern { get; }
         public CommandPattern(string pattern)
         {
+            //values such as "[listed: x,...z]... ...[any] are accepted"
             ArgumentsPattern = new List<CommandArgumentPattern>();
             var argsInfo = pattern
                 .Replace(" ", "")
@@ -27,7 +28,9 @@ namespace TaskManager.AppLayer
                         ArgumentsPattern.Add(new CommandArgumentPattern(CommandPatternType.AnyString));
                         break;
                     default:
-                        throw new ArgumentException("Incorrect argument pattern type!");
+                        throw new ArgumentException(
+                            "Incorrect argument pattern type! " +
+                            "Values such as \"[listed: x,..., z] ... [any] are accepted\"!");
                 }
             }
         }
