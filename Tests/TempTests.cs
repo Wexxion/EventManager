@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TaskManager.DomainLayer;
 using TaskManager.AppLayer;
+using TaskManager.RepoLayer;
 
 namespace Tests
 {
@@ -11,11 +12,11 @@ namespace Tests
         public SpecialCommand() : base("special") {}
 
         [Pattern("[listed: one, two, three] [any]")]
-        public string HandleSpecialLexem(List<string> args)
+        public CommandResponse HandleSpecialLexem(Message message)
         {
-            if (args.Count == 0)
-                return "1";
-            return string.Join("+", args);
+            if (message.Args.Count == 0)
+                return new CommandResponse("1");
+            return new CommandResponse(string.Join("+", message.Args));
         }
 
         public void NoAttributedMethod(List<string> args)
@@ -54,12 +55,10 @@ namespace Tests
         {
             var pattern = new CommandPattern("[listed: two, one, three] [any]");
             var testingInstance = new SpecialCommand();
-            Assert.AreEqual(
-                testingInstance.MethodsDict[pattern].Invoke(testingInstance,
-                new object[]
-                {
-                    new List<string>()
-                }), "1");
+            var response = (CommandResponse)testingInstance
+                .MethodsDict[pattern]
+                .Invoke(testingInstance, new object[] {new Message("")});
+            Assert.AreEqual(response.Text, new CommandResponse("1").Text);
         }
 
         [TestMethod]
@@ -67,8 +66,8 @@ namespace Tests
         {
             var command = new SpecialCommand();
             Assert.AreEqual(
-                command.Execute(new List<string> {"three", "something"}),
-                "three+something");
+                command.Execute(new Message("three something")).Text,
+                new CommandResponse("three+something").Text);
         }
 
         [TestMethod]
@@ -76,11 +75,11 @@ namespace Tests
         {
             var command = new SpecialCommand();
             Assert.ThrowsException<ArgumentException>(
-                () => command.Execute(new List<string> {"four", "three", "one"}));
+                () => command.Execute(new Message("four three one")));
             Assert.ThrowsException<ArgumentException>(
-                () => command.Execute(new List<string>()));
+                () => command.Execute(new Message("")));
             Assert.ThrowsException<ArgumentException>(
-                () => command.Execute(new List<string> {"four", "smth"}));
+                () => command.Execute(new Message("four smth")));
         }
     }
 }

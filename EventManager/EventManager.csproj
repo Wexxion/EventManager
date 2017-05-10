@@ -83,6 +83,7 @@
     <Compile Include="AppLayer\CommandArgumentPattern.cs" />
     <Compile Include="AppLayer\CommandPattern.cs" />
     <Compile Include="AppLayer\CommandPatternType.cs" />
+    <Compile Include="AppLayer\CommandResponse.cs" />
     <Compile Include="AppLayer\CommandsTypes.cs" />
     <Compile Include="AppLayer\PatternAttribute.cs" />
     <Compile Include="DomainLayer\Location.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="DomainLayer\VEvent.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepoLayer\Message.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
