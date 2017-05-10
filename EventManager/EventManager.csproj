@@ -79,15 +79,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppLayer\BaseCommand.cs" />
-    <Compile Include="AppLayer\CommandArgumentPattern.cs" />
-    <Compile Include="AppLayer\CommandPattern.cs" />
-    <Compile Include="AppLayer\CommandPatternType.cs" />
-    <Compile Include="AppLayer\CommandResponse.cs" />
-    <Compile Include="AppLayer\CommandsTypes.cs" />
-    <Compile Include="AppLayer\PatternAttribute.cs" />
-    <Compile Include="DomainLayer\Location.cs" />
-    <Compile Include="DomainLayer\Person.cs" />
+    <Compile Include="AppLayer\EventCommand.cs" />
+    <Compile Include="RepoLayer\Command\BaseCommand.cs" />
+    <Compile Include="RepoLayer\Command\CommandArgumentPattern.cs" />
+    <Compile Include="RepoLayer\Command\CommandPattern.cs" />
+    <Compile Include="RepoLayer\Command\CommandPatternType.cs" />
+    <Compile Include="RepoLayer\Command\CommandResponse.cs" />
+    <Compile Include="RepoLayer\Command\CommandsTypes.cs" />
+    <Compile Include="RepoLayer\Command\PatternAttribute.cs" />
+    <Compile Include="RepoLayer\Location.cs" />
+    <Compile Include="RepoLayer\Person.cs" />
     <Compile Include="DomainLayer\VEvent.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

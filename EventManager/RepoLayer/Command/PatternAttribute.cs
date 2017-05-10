@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TaskManager.AppLayer
+
+namespace TaskManager.RepoLayer.Command
 {
     public class PatternAttribute: Attribute
     {

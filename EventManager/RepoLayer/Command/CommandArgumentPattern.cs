@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 
-namespace TaskManager.AppLayer
+namespace TaskManager.RepoLayer.Command
 {
     public class CommandArgumentPattern
     {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TaskManager.RepoLayer;
 
 
 namespace TaskManager.DomainLayer
@@ -28,13 +29,13 @@ namespace TaskManager.DomainLayer
         public Location Location { get; }
         public TimeSpan FirstReminder { get; private set; }
         public TimeSpan SecondReminder { get; private set; }
-        public HashSet<Person> Partisipants { get; }
+        public HashSet<Person> Participants { get; }
 
         public VEvent(Person creator, string name)
         {
             this.Creator = creator;
             this.Name = name;
-            this.Partisipants.Add(Creator);
+            this.Participants.Add(Creator);
         }
 
         public void SetDescription(string description) => this.Description = description;
@@ -52,8 +53,8 @@ namespace TaskManager.DomainLayer
             this.End = ending;
         }
 
-        public void AddPartisipant(Person person)
-            => this.Partisipants.Add(person);
+        public void AddParticipant(Person person)
+            => this.Participants.Add(person);
 
         public void SetFirstReminder(TimeSpan span) => this.FirstReminder = span;
         public void SetSecondReminder(TimeSpan span) => this.SecondReminder = span;

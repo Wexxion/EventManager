@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TaskManager.AppLayer
+
+namespace TaskManager.RepoLayer.Command
 {
-    public enum CommandPatternType
+    public enum CommandType
     {
-        AnyString,
-        ListedString
+        Text,
+        CustomKeyboard
     }
 }

@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TaskManager.AppLayer
+
+namespace TaskManager.RepoLayer.Command
 {
     public class CommandResponse
     {

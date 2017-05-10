@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using TaskManager.RepoLayer;
 
-namespace TaskManager.AppLayer
+namespace TaskManager.RepoLayer.Command
 {
     public abstract class BaseCommand
     {

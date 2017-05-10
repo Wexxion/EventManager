@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TaskManager.DomainLayer;
-using TaskManager.AppLayer;
 using TaskManager.RepoLayer;
+using TaskManager.RepoLayer.Command;
 
 namespace Tests
 {

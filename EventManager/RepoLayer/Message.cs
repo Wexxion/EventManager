@@ -8,6 +8,7 @@ namespace TaskManager.RepoLayer
 {
     public class Message
     {
+        public Person Author { get; }
         public string Text { get; }
         public List<string> Args => 
             Text.Split(
@@ -17,6 +18,12 @@ namespace TaskManager.RepoLayer
         public Message(string message)
         {
             Text = message;
+        }
+
+        public Message(Person author, string text)
+        {
+            this.Author = author;
+            this.Text = text;
         }
     }
 }
