@@ -2,7 +2,7 @@
 
 namespace TaskManager.RepoLayer.Command
 {
-    public enum CommandType
+    public enum CommandTypes
     {
         Text,
         CustomKeyboard

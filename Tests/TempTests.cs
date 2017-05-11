@@ -13,11 +13,11 @@ namespace Tests
         }
 
         [Pattern("[listed: one, two, three] [any]")]
-        public CommandResponse HandleSpecialLexem(TgMessage message)
+        public Response HandleSpecialLexem(TgMessage message)
         {
             if (message.Args.Count == 0)
-                return new CommandResponse("1");
-            return new CommandResponse(string.Join("+", message.Args));
+                return new Response("1");
+            return new Response(string.Join("+", message.Args));
         }
 
         public void NoAttributedMethod(List<string> args)
@@ -31,21 +31,21 @@ namespace Tests
         [TestMethod]
         public void ArgumentPatternsWithRandomArgumentOrderAreEqual()
         {
-            var testObject = new CommandArgumentPattern(new List<string> { "two", "one", "three" });
-            Assert.AreEqual(testObject, new CommandArgumentPattern(new List<string> {"one", "two", "three"}));
+            var testObject = new ArgumentPattern(new List<string> { "two", "one", "three" });
+            Assert.AreEqual(testObject, new ArgumentPattern(new List<string> {"one", "two", "three"}));
         }
 
         [TestMethod]
         public void ArgumentPatternsWithNullNotEqualToSmth()
         {
-            var testObject = new CommandArgumentPattern(null);
-            Assert.AreNotEqual(new CommandArgumentPattern(new List<string>()), testObject);
+            var testObject = new ArgumentPattern(null);
+            Assert.AreNotEqual(new ArgumentPattern(new List<string>()), testObject);
         }
 
         [TestMethod]
         public void AttributedMethodsAreInDict()
         {
-            var pattern = new CommandPattern("[listed: two, one, three] [any]");
+            var pattern = new BaseCommandPattern("[listed: two, one, three] [any]");
             var testingInstance = new SpecialCommand();
             Assert.IsTrue(testingInstance.MethodsDict.ContainsKey(pattern));
         }
@@ -53,12 +53,12 @@ namespace Tests
         [TestMethod]
         public void AttributedMethodIsInvokable()
         {
-            var pattern = new CommandPattern("[listed: two, one, three] [any]");
+            var pattern = new BaseCommandPattern("[listed: two, one, three] [any]");
             var testingInstance = new SpecialCommand();
-            var response = (CommandResponse)testingInstance
+            var response = (Response)testingInstance
                 .MethodsDict[pattern]
                 .Invoke(testingInstance, new object[] {new TgMessage("")});
-            Assert.AreEqual(response.Text, new CommandResponse("1").Text);
+            Assert.AreEqual(response.Text, new Response("1").Text);
         }
 
         [TestMethod]
@@ -67,7 +67,7 @@ namespace Tests
             var command = new SpecialCommand();
             Assert.AreEqual(
                 command.Execute(new TgMessage("/special three something")).Text,
-                new CommandResponse("three+something").Text);
+                new Response("three+something").Text);
         }
 
         [TestMethod]

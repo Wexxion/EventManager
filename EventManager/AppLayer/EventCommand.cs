@@ -10,9 +10,9 @@ namespace TaskManager.AppLayer
         }
 
         [Pattern("[listed: list]")]
-        public CommandResponse GetEventsInfo(TgMessage msg)
+        public Response GetEventsInfo(TgMessage msg)
         {
-            return new CommandResponse("No info, should implement it!");
+            return new Response("No info, should implement it!");
         }
     }
 }

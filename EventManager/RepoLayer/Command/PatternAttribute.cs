@@ -6,10 +6,10 @@ namespace TaskManager.RepoLayer.Command
 {
     public class PatternAttribute: Attribute
     {
-        public CommandPattern Pattern { get; }
+        public BaseCommandPattern Pattern { get; }
         public PatternAttribute(string pattern)
         {
-            Pattern = new CommandPattern(pattern);
+            Pattern = new BaseCommandPattern(pattern);
         }
     }
 }

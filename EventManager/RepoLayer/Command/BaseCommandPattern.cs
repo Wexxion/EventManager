@@ -4,13 +4,13 @@ using System.Linq;
 
 namespace TaskManager.RepoLayer.Command
 {
-    public class CommandPattern
+    public class BaseCommandPattern
     {
-        public List<CommandArgumentPattern> ArgumentsPattern { get; }
-        public CommandPattern(string pattern)
+        public List<ArgumentPattern> ArgumentsPattern { get; }
+        public BaseCommandPattern(string pattern)
         {
             //values such as "[listed: x,...z]... ...[any] are accepted"
-            ArgumentsPattern = new List<CommandArgumentPattern>();
+            ArgumentsPattern = new List<ArgumentPattern>();
             var argsInfo = pattern
                 .Replace(" ", "")
                 .Split(new [] {"]["}, StringSplitOptions.RemoveEmptyEntries)
@@ -22,10 +22,10 @@ namespace TaskManager.RepoLayer.Command
                 switch (argument[0])
                 {
                     case "listed":
-                        ArgumentsPattern.Add(new CommandArgumentPattern(argument[1].Split(',').ToList()));
+                        ArgumentsPattern.Add(new ArgumentPattern(argument[1].Split(',').ToList()));
                         break;
                     case "any":
-                        ArgumentsPattern.Add(new CommandArgumentPattern(CommandPatternType.AnyString));
+                        ArgumentsPattern.Add(new ArgumentPattern(PatternType.AnyString));
                         break;
                     default:
                         throw new ArgumentException(
@@ -40,7 +40,7 @@ namespace TaskManager.RepoLayer.Command
             if (args.Count != ArgumentsPattern.Count) return false;
             for (var i = 0; i < args.Count; i++)
             {
-                if (ArgumentsPattern[i].Type == CommandPatternType.AnyString)
+                if (ArgumentsPattern[i].Type == PatternType.AnyString)
                     continue;
                 if (!ArgumentsPattern[i].AvaliableArguments.Contains(args[i]))
                     return false;
@@ -52,12 +52,12 @@ namespace TaskManager.RepoLayer.Command
         {
             if (obj == null) return false;
             if (ReferenceEquals(obj, this)) return true;
-            var castedObj = (CommandPattern) obj;
+            var castedObj = (BaseCommandPattern) obj;
             if (ReferenceEquals(this.ArgumentsPattern, castedObj.ArgumentsPattern)) return true;
             return ArgumentsPattern?.SequenceEqual(castedObj.ArgumentsPattern) ?? false;
         }
 
-        protected bool Equals(CommandPattern other)
+        protected bool Equals(BaseCommandPattern other)
         {
             return Equals(ArgumentsPattern, other.ArgumentsPattern);
         }

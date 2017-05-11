@@ -95,11 +95,11 @@
   <ItemGroup>
     <Compile Include="AppLayer\EventCommand.cs" />
     <Compile Include="RepoLayer\Command\BaseCommand.cs" />
-    <Compile Include="RepoLayer\Command\CommandArgumentPattern.cs" />
-    <Compile Include="RepoLayer\Command\CommandPattern.cs" />
-    <Compile Include="RepoLayer\Command\CommandPatternType.cs" />
-    <Compile Include="RepoLayer\Command\CommandResponse.cs" />
-    <Compile Include="RepoLayer\Command\CommandsTypes.cs" />
+    <Compile Include="RepoLayer\Command\ArgumentPattern.cs" />
+    <Compile Include="RepoLayer\Command\BaseCommandPattern.cs" />
+    <Compile Include="RepoLayer\Command\PatternType.cs" />
+    <Compile Include="RepoLayer\Command\Response.cs" />
+    <Compile Include="RepoLayer\Command\BaseCommandTypes.cs" />
     <Compile Include="RepoLayer\Messages\IResponsable.cs" />
     <Compile Include="RepoLayer\Command\PatternAttribute.cs" />
     <Compile Include="RepoLayer\Location.cs" />

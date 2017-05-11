@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TaskManager.RepoLayer.Command
 {
-    public enum CommandPatternType
+    public enum PatternType
     {
         AnyString,
         ListedString

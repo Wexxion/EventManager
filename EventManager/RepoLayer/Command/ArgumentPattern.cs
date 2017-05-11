@@ -5,20 +5,19 @@ using System.Linq;
 
 namespace TaskManager.RepoLayer.Command
 {
-    public class CommandArgumentPattern
+    public class ArgumentPattern
     {
-        public CommandPatternType Type { get; }
+        public PatternType Type { get; }
         public List<string> AvaliableArguments { get; }
-
-        public CommandArgumentPattern(CommandPatternType type)
+        public ArgumentPattern(PatternType type)
         {
             Type = type;
             AvaliableArguments = new List<string>();
         }
 
-        public CommandArgumentPattern(List<string> avaliableArguments)
+        public ArgumentPattern(List<string> avaliableArguments)
         {
-            Type = CommandPatternType.ListedString;
+            Type = PatternType.ListedString;
             AvaliableArguments = avaliableArguments;
         }
 
@@ -26,8 +25,8 @@ namespace TaskManager.RepoLayer.Command
         {
             if (obj == null) return false;
             if (ReferenceEquals(obj, this)) return true;
-            if (!(obj is CommandArgumentPattern)) return false;
-            var castedObject = (CommandArgumentPattern) obj;
+            if (!(obj is ArgumentPattern)) return false;
+            var castedObject = (ArgumentPattern) obj;
             if (ReferenceEquals(AvaliableArguments, castedObject.AvaliableArguments))
                 return castedObject.Type.Equals(Type);
             var sameArgs = castedObject.AvaliableArguments?.OrderBy(x => x)
@@ -36,7 +35,7 @@ namespace TaskManager.RepoLayer.Command
             return sameArgs && sameTypes;
         }
 
-        protected bool Equals(CommandArgumentPattern other)
+        protected bool Equals(ArgumentPattern other)
         {
             return Equals(AvaliableArguments, other.AvaliableArguments);
         }

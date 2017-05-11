@@ -9,13 +9,13 @@ namespace TaskManager.RepoLayer.Command
     public abstract class BaseCommand
     {
         public string Name { get; }
-        public CommandType Type { get; }
+        public CommandTypes Type { get; }
         public event EventHandler ExecuteEvent;
-        public Dictionary<CommandPattern, MethodBase> MethodsDict { get; }
+        public Dictionary<BaseCommandPattern, MethodBase> MethodsDict { get; }
         protected BaseCommand(string name)
         {
             Name = name;
-            MethodsDict = new Dictionary<CommandPattern, MethodBase>();
+            MethodsDict = new Dictionary<BaseCommandPattern, MethodBase>();
             var methods = GetType().GetMethods();
             foreach (var method in methods)
             {

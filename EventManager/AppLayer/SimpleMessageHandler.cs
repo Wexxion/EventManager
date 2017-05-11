@@ -32,7 +32,7 @@ namespace TaskManager.AppLayer
             var person = new Person(info.Id, info.FirstName, info.LastName, info.Username);
             var tgMessage = new TgMessage(person, message.Text);
             if (!EventCommandDict.ContainsKey(tgMessage.Command))
-                return new CommandResponse("No such command implemented!");
+                return new Response("No such command implemented!");
 
             try
             {
@@ -40,7 +40,7 @@ namespace TaskManager.AppLayer
             }
             catch (ArgumentException)
             {
-                return new CommandResponse("Incorrect command arguments!");
+                return new Response("Incorrect command arguments!");
             }
         }
     }
