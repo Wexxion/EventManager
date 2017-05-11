@@ -27,18 +27,19 @@ namespace TaskManager.RepoLayer.Command
                     throw new ArgumentException("Attributed method should have only one parameter!");
                 if (method.GetParameters().First().ParameterType != typeof(Message))
                     throw new ArgumentException("Attributed method parameter should be MessageType!");
-                if (method.ReturnType != typeof(CommandResponse))
+                var a = method.ReturnType.GetInterfaces();
+                if (!method.ReturnType.GetInterfaces().Contains(typeof(IResponsable)))
                     throw new ArgumentException("Attributed method return type should be CommandResponse!");
-                MethodsDict.Add(attribute.pattern, method);
+                MethodsDict.Add(attribute.Pattern, method);
             }
         }
-        public CommandResponse Execute(Message message)
+        public IResponsable Execute(Message message)
         {
             foreach (var action in OnExecute)
                 action();
             foreach (var pattern in MethodsDict.Keys)
                 if (pattern.DoesPatternAcceptArguments(message.Args))
-                    return (CommandResponse) MethodsDict[pattern].Invoke(this, new object[] {message});
+                    return (IResponsable) MethodsDict[pattern].Invoke(this, new object[] {message});
             throw new ArgumentException("This command doesn't accept such arguments!");
         }
     }

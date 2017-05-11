@@ -22,8 +22,8 @@ namespace TaskManager.RepoLayer
 
         public Message(Person author, string text)
         {
-            this.Author = author;
-            this.Text = text;
+            Author = author;
+            Text = text;
         }
     }
 }

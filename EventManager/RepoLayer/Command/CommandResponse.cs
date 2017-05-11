@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TaskManager.RepoLayer.Command
 {
-    public class CommandResponse
+    public class CommandResponse : IResponsable
     {
         public string Text { get; }
 

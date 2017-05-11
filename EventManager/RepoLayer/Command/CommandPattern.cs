@@ -13,7 +13,7 @@ namespace TaskManager.RepoLayer.Command
             ArgumentsPattern = new List<CommandArgumentPattern>();
             var argsInfo = pattern
                 .Replace(" ", "")
-                .Split(new string[] {"]["}, StringSplitOptions.RemoveEmptyEntries)
+                .Split(new [] {"]["}, StringSplitOptions.RemoveEmptyEntries)
                 .Select(x => x.Replace("]", "").Replace("[", "").Split(':')).ToList();
             foreach (var argument in argsInfo)
             {
@@ -67,8 +67,7 @@ namespace TaskManager.RepoLayer.Command
             unchecked
             {
                 return ArgumentsPattern?
-                           .Aggregate(397, (current, arg) => current ^ arg.GetHashCode())
-                       ?? 0;
+                           .Aggregate(397, (current, arg) => current ^ arg.GetHashCode()) ?? 0;
             }
         }
     }
