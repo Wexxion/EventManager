@@ -21,7 +21,9 @@ namespace TaskManager.RepoLayer.Messages
         public TgMessage(Person author, string text)
         {
             Author = author;
-            Text = text;
+            var splittedText = text.Split();
+            Args = splittedText.Skip(1).ToList();
+            Command = splittedText.First().Replace("/", "");
         }
     }
 }

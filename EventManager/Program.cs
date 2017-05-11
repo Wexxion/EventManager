@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using TaskManager.AppLayer;
+
 using Telegram.Bot;
 using Telegram.Bot.Args;
 
@@ -9,7 +10,7 @@ namespace TaskManager
     class Program
     {
         private static readonly TelegramBotClient Bot
-            = new TelegramBotClient("389115701:AAFj6iv5yK_GspDAyOEhpX88Abnj5sXoz5U");
+            = new TelegramBotClient("");
         private static readonly SimpleMessageHandler Handler = new SimpleMessageHandler();
 
         static void Main(string[] args)
@@ -41,8 +42,16 @@ namespace TaskManager
         private static async void BotOnMessageReceived(object sender, MessageEventArgs messageEventArgs)
         {
             var message = messageEventArgs.Message;
-            var answer = Handler.ProcessMessage(message).Text;
-            await Bot.SendTextMessageAsync(message.Chat.Id, answer);
+            try
+            {
+                var answer = Handler.ProcessMessage(message).Text;
+                await Bot.SendTextMessageAsync(message.Chat.Id, answer);
+            }
+            catch (ArgumentException e)
+            {
+                await Bot.SendTextMessageAsync(message.Chat.Id, e.Message);
+            }
+            
         }
 
         private static async void BotOnCallbackQueryReceived(object sender, CallbackQueryEventArgs callbackQueryEventArgs)

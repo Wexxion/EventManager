@@ -8,7 +8,7 @@ using Telegram.Bot.Types.Enums;
 
 namespace TaskManager.AppLayer
 {
-    class SimpleMessageHandler : IMessageHandler
+    public class SimpleMessageHandler : IMessageHandler
     {
         private Dictionary<string, BaseCommand> EventCommandDict { get; }
         public IResponsable ProcessMessage(Message message)
