@@ -1,22 +1,15 @@
 ﻿using System;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using TaskManager.RepoLayer.Command;
-using TaskManager.RepoLayer.Messages;
+using TaskManager.AppLayer;
 using Telegram.Bot;
 using Telegram.Bot.Args;
-using Telegram.Bot.Types;
-using Telegram.Bot.Types.Enums;
-using Telegram.Bot.Types.ReplyMarkups;
 
 namespace TaskManager
 {
     class Program
     {
         private static readonly TelegramBotClient Bot
-            = new TelegramBotClient("");
+            = new TelegramBotClient("389115701:AAFj6iv5yK_GspDAyOEhpX88Abnj5sXoz5U");
         private static readonly SimpleMessageHandler Handler = new SimpleMessageHandler();
 
         static void Main(string[] args)
@@ -48,16 +41,8 @@ namespace TaskManager
         private static async void BotOnMessageReceived(object sender, MessageEventArgs messageEventArgs)
         {
             var message = messageEventArgs.Message;
-            try
-            {
-                var answer = Handler.ProcessMessage(message).Text;
-                await Bot.SendTextMessageAsync(message.Chat.Id, answer);
-            }
-            catch (ArgumentException e)
-            {
-                await Bot.SendTextMessageAsync(message.Chat.Id, e.Message);
-            }
-            
+            var answer = Handler.ProcessMessage(message).Text;
+            await Bot.SendTextMessageAsync(message.Chat.Id, answer);
         }
 
         private static async void BotOnCallbackQueryReceived(object sender, CallbackQueryEventArgs callbackQueryEventArgs)

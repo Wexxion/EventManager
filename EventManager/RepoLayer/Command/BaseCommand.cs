@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using TaskManager.RepoLayer;
+using TaskManager.RepoLayer.Messages;
 
 namespace TaskManager.RepoLayer.Command
 {
@@ -10,12 +10,11 @@ namespace TaskManager.RepoLayer.Command
     {
         public string Name { get; }
         public CommandType Type { get; }
-        public List<Action> OnExecute { get; }
+        public event EventHandler ExecuteEvent;
         public Dictionary<CommandPattern, MethodBase> MethodsDict { get; }
         protected BaseCommand(string name)
         {
             Name = name;
-            OnExecute = new List<Action>();
             MethodsDict = new Dictionary<CommandPattern, MethodBase>();
             var methods = GetType().GetMethods();
             foreach (var method in methods)
@@ -32,10 +31,10 @@ namespace TaskManager.RepoLayer.Command
                 MethodsDict.Add(attribute.Pattern, method);
             }
         }
+
         public IResponsable Execute(TgMessage message)
         {
-            foreach (var action in OnExecute)
-                action();
+            ExecuteEvent?.Invoke(this, EventArgs.Empty);
             foreach (var pattern in MethodsDict.Keys)
                 if (pattern.DoesPatternAcceptArguments(message.Args))
                     return (IResponsable) MethodsDict[pattern].Invoke(this, new object[] {message});

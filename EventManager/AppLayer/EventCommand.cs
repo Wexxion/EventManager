@@ -1,5 +1,5 @@
-﻿using TaskManager.RepoLayer;
-using TaskManager.RepoLayer.Command;
+﻿using TaskManager.RepoLayer.Command;
+using TaskManager.RepoLayer.Messages;
 
 namespace TaskManager.AppLayer
 {

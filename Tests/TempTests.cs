@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TaskManager.RepoLayer;
 using TaskManager.RepoLayer.Command;
+using TaskManager.RepoLayer.Messages;
 
 namespace Tests
 {
     class SpecialCommand : BaseCommand
     {
-        public SpecialCommand() : base("special") {}
+        public SpecialCommand() : base("special")
+        {
+        }
 
         [Pattern("[listed: one, two, three] [any]")]
         public CommandResponse HandleSpecialLexem(TgMessage message)
@@ -20,7 +22,6 @@ namespace Tests
 
         public void NoAttributedMethod(List<string> args)
         {
-            
         }
     }
 
@@ -65,7 +66,7 @@ namespace Tests
         {
             var command = new SpecialCommand();
             Assert.AreEqual(
-                command.Execute(new TgMessage("three something")).Text,
+                command.Execute(new TgMessage("/special three something")).Text,
                 new CommandResponse("three+something").Text);
         }
 
@@ -74,11 +75,11 @@ namespace Tests
         {
             var command = new SpecialCommand();
             Assert.ThrowsException<ArgumentException>(
-                () => command.Execute(new TgMessage("four three one")));
+                () => command.Execute(new TgMessage("/special four three one")));
             Assert.ThrowsException<ArgumentException>(
                 () => command.Execute(new TgMessage("")));
             Assert.ThrowsException<ArgumentException>(
-                () => command.Execute(new TgMessage("four smth")));
+                () => command.Execute(new TgMessage("/special four smth")));
         }
     }
 }

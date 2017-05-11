@@ -54,6 +54,7 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -99,16 +100,16 @@
     <Compile Include="RepoLayer\Command\CommandPatternType.cs" />
     <Compile Include="RepoLayer\Command\CommandResponse.cs" />
     <Compile Include="RepoLayer\Command\CommandsTypes.cs" />
-    <Compile Include="RepoLayer\Command\IResponsable.cs" />
+    <Compile Include="RepoLayer\Messages\IResponsable.cs" />
     <Compile Include="RepoLayer\Command\PatternAttribute.cs" />
     <Compile Include="RepoLayer\Location.cs" />
     <Compile Include="RepoLayer\Messages\IMessageHandler.cs" />
-    <Compile Include="RepoLayer\Messages\SimpleMessageHandler.cs" />
+    <Compile Include="AppLayer\SimpleMessageHandler.cs" />
     <Compile Include="RepoLayer\Person.cs" />
     <Compile Include="DomainLayer\VEvent.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RepoLayer\TGMessage.cs" />
+    <Compile Include="RepoLayer\Messages\TGMessage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
