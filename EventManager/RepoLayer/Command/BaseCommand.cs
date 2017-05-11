@@ -25,15 +25,14 @@ namespace TaskManager.RepoLayer.Command
 
                 if (method.GetParameters().Length != 1)
                     throw new ArgumentException("Attributed method should have only one parameter!");
-                if (method.GetParameters().First().ParameterType != typeof(Message))
+                if (method.GetParameters().First().ParameterType != typeof(TgMessage))
                     throw new ArgumentException("Attributed method parameter should be MessageType!");
-                var a = method.ReturnType.GetInterfaces();
                 if (!method.ReturnType.GetInterfaces().Contains(typeof(IResponsable)))
                     throw new ArgumentException("Attributed method return type should be CommandResponse!");
                 MethodsDict.Add(attribute.Pattern, method);
             }
         }
-        public IResponsable Execute(Message message)
+        public IResponsable Execute(TgMessage message)
         {
             foreach (var action in OnExecute)
                 action();

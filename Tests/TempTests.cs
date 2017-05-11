@@ -11,7 +11,7 @@ namespace Tests
         public SpecialCommand() : base("special") {}
 
         [Pattern("[listed: one, two, three] [any]")]
-        public CommandResponse HandleSpecialLexem(Message message)
+        public CommandResponse HandleSpecialLexem(TgMessage message)
         {
             if (message.Args.Count == 0)
                 return new CommandResponse("1");
@@ -56,7 +56,7 @@ namespace Tests
             var testingInstance = new SpecialCommand();
             var response = (CommandResponse)testingInstance
                 .MethodsDict[pattern]
-                .Invoke(testingInstance, new object[] {new Message("")});
+                .Invoke(testingInstance, new object[] {new TgMessage("")});
             Assert.AreEqual(response.Text, new CommandResponse("1").Text);
         }
 
@@ -65,7 +65,7 @@ namespace Tests
         {
             var command = new SpecialCommand();
             Assert.AreEqual(
-                command.Execute(new Message("three something")).Text,
+                command.Execute(new TgMessage("three something")).Text,
                 new CommandResponse("three+something").Text);
         }
 
@@ -74,11 +74,11 @@ namespace Tests
         {
             var command = new SpecialCommand();
             Assert.ThrowsException<ArgumentException>(
-                () => command.Execute(new Message("four three one")));
+                () => command.Execute(new TgMessage("four three one")));
             Assert.ThrowsException<ArgumentException>(
-                () => command.Execute(new Message("")));
+                () => command.Execute(new TgMessage("")));
             Assert.ThrowsException<ArgumentException>(
-                () => command.Execute(new Message("four smth")));
+                () => command.Execute(new TgMessage("four smth")));
         }
     }
 }

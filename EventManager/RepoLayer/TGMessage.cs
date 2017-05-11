@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TaskManager.RepoLayer
 {
-    public class Message
+    public class TgMessage
     {
         public Person Author { get; }
         public string Text { get; }
@@ -15,12 +15,12 @@ namespace TaskManager.RepoLayer
                 new [] {" "}, 
                 StringSplitOptions.RemoveEmptyEntries
                 ).ToList();
-        public Message(string message)
+        public TgMessage(string message)
         {
             Text = message;
         }
 
-        public Message(Person author, string text)
+        public TgMessage(Person author, string text)
         {
             Author = author;
             Text = text;

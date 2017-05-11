@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using TaskManager.RepoLayer.Messages;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types;
@@ -15,6 +16,7 @@ namespace TaskManager
     {
         private static readonly TelegramBotClient Bot
             = new TelegramBotClient("");
+        private static SimpleMessageHandler Handler = new SimpleMessageHandler();
 
         static void Main(string[] args)
         {
@@ -45,6 +47,7 @@ namespace TaskManager
         private static async void BotOnMessageReceived(object sender, MessageEventArgs messageEventArgs)
         {
             var message = messageEventArgs.Message;
+            //Handler.AnalyseMessage(message);
 
             if (message == null || message.Type != MessageType.TextMessage) return;
 
