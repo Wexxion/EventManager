@@ -9,29 +9,21 @@ namespace TaskManager.RepoLayer.Messages
 {
     class SimpleMessageHandler : IMessageHandler
     {
-        private EventCommand EventCommand { get; }
-        public SimpleMessageHandler()
-        {
-            EventCommand = new EventCommand();
-        }
-        public void AnalyseMessage(Message message)
+        private EventCommand EventCommand { get; } = new EventCommand();
+        public IResponsable ProcessMessage(Message message)
         {
             if (message?.Type == MessageType.TextMessage)
-                ProccessTextMessage(message);
+                return ProccessTextMessage(message);
+            throw new ArgumentException($"{message?.Type} Is not supported yet :(");
         }
 
-        public void ProccessTextMessage(Message message)
+        public IResponsable ProccessTextMessage(Message message)
         {
             var info = message.Chat;
             var person = new Person(info.Id, info.FirstName, info.LastName, info.Username);
             var tgMessage = new TgMessage(person, message.Text);
-            var a = EventCommand.Execute(tgMessage);
-            Console.WriteLine(a.Text);
-        }
-
-        public void SendMessage(IResponsable massageData, IReplyMarkup replyMarkup)
-        {
-            
+            var answer = EventCommand.Execute(tgMessage);
+            return answer;
         }
     }
 }

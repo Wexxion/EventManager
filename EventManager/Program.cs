@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using TaskManager.RepoLayer.Command;
 using TaskManager.RepoLayer.Messages;
 using Telegram.Bot;
 using Telegram.Bot.Args;
@@ -16,7 +17,7 @@ namespace TaskManager
     {
         private static readonly TelegramBotClient Bot
             = new TelegramBotClient("");
-        private static SimpleMessageHandler Handler = new SimpleMessageHandler();
+        private static readonly SimpleMessageHandler Handler = new SimpleMessageHandler();
 
         static void Main(string[] args)
         {
@@ -47,61 +48,16 @@ namespace TaskManager
         private static async void BotOnMessageReceived(object sender, MessageEventArgs messageEventArgs)
         {
             var message = messageEventArgs.Message;
-            //Handler.AnalyseMessage(message);
-
-            if (message == null || message.Type != MessageType.TextMessage) return;
-
-            if (message.Text.StartsWith("/inline"))
+            try
             {
-                await Bot.SendChatActionAsync(message.Chat.Id, ChatAction.Typing);
-
-                var keyboard = new InlineKeyboardMarkup(new[]
-                {
-                    new[] // first row
-                    {
-                        new InlineKeyboardButton("1.0"),
-                        new InlineKeyboardButton("1.1"),
-                    },
-                    new[] // second row
-                    {
-                        new InlineKeyboardButton("2.1"),
-                        new InlineKeyboardButton("2.2"),
-                    }
-                });
-
-                //await Task.Delay(500); // simulate longer running task
-
-                await Bot.SendTextMessageAsync(message.Chat.Id, "Choose",
-                    replyMarkup: keyboard);
+                var answer = Handler.ProcessMessage(message).Text;
+                await Bot.SendTextMessageAsync(message.Chat.Id, answer);
             }
-            else if (message.Text.StartsWith("/keyboard")) // send custom keyboard
+            catch (ArgumentException e)
             {
-                var keyboard = new ReplyKeyboardMarkup(new[]
-                {
-                    new [] // first row
-                    {
-                        new KeyboardButton("1.1"),
-                        new KeyboardButton("1.2"),
-                    },
-                    new [] // last row
-                    {
-                        new KeyboardButton("2.1"),
-                        new KeyboardButton("2.2"),
-                    }
-                });
-
-                await Bot.SendTextMessageAsync(message.Chat.Id, "Choose", replyMarkup: keyboard);
+                await Bot.SendTextMessageAsync(message.Chat.Id, e.Message);
             }
-            else
-            {
-                var usage = @"Usage:
-                    /inline   - send inline keyboard
-                    /keyboard - send custom keyboard
-                    ";
-
-                await Bot.SendTextMessageAsync(message.Chat.Id, usage,
-                    replyMarkup: new ReplyKeyboardHide());
-            }
+            
         }
 
         private static async void BotOnCallbackQueryReceived(object sender, CallbackQueryEventArgs callbackQueryEventArgs)

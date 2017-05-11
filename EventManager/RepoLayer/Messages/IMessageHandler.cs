@@ -7,7 +7,6 @@ namespace TaskManager.RepoLayer.Messages
 {
     public interface IMessageHandler
     {
-        void AnalyseMessage(Message message);
-        void SendMessage(IResponsable massageData, IReplyMarkup replyMarkup);
+        IResponsable ProcessMessage(Message message);
     }
 }

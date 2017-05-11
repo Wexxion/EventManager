@@ -15,6 +15,5 @@ namespace TaskManager.RepoLayer.Command
         {
             Text = responseText;
         }
-        
     }
 }
