@@ -9,15 +9,14 @@ namespace TaskManager.RepoLayer
 {
     public class Person
     {
-        public long Id { get; }  // это chatID
         public string FirstName { get; }
         public string LastName { get; }
         public string UserName { get; }
-        public int TelegramId { get; } //хз как получить
+        public int TelegramId { get; }
 
-        public Person(long id, string firstName, string lastName, string username)
+        public Person(int telegramId, string firstName, string lastName, string username)
         {
-            Id = id;
+            TelegramId = telegramId;
             FirstName = firstName;
             LastName = lastName;
             UserName = username;

@@ -28,7 +28,7 @@ namespace TaskManager.AppLayer
 
         public IResponsable ProccessTextMessage(Message message)
         {
-            var info = message.Chat;
+            var info = message.From;
             var person = new Person(info.Id, info.FirstName, info.LastName, info.Username);
             var tgMessage = new TgMessage(person, message.Text);
             if (!EventCommandDict.ContainsKey(tgMessage.Command))
