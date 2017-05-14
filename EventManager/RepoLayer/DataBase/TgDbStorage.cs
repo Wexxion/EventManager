@@ -7,10 +7,10 @@ using TaskManager.RepoLayer.DataBase.DbModel;
 
 namespace TaskManager.RepoLayer.DataBase
 {
-    public class Storage
+    public class TgDbStorage : ITgStorage
     {
         private Context Db { get; }
-        public Storage()
+        public TgDbStorage()
         {
             this.Db = new Context("TestBot");
         }
@@ -26,15 +26,20 @@ namespace TaskManager.RepoLayer.DataBase
         }
         public void AddEvent(VEvent e)
         {
-            var dbUser = GetUser(e.Creator.TelegramId);
+            var dbUser = GetDbUser(e.Creator.TelegramId);
             var dbEvent = Mapper.Map<VEventInDb>(e);
             dbEvent.Creator = dbUser;
             foreach (var user in e.Participants)
-                dbEvent.Participants.Add(GetUser(user.TelegramId));
+                dbEvent.Participants.Add(GetDbUser(user.TelegramId));
             Db.Events.Add(dbEvent);
             Db.SaveChanges();
         }
-        public PersonInDb GetUser(int id)
+
+        public Person GetUser(int id)
+        {
+            return Mapper.Map<Person>(GetDbUser(id));
+        }
+        private PersonInDb GetDbUser(int id)
         {
             return Db
                  .Users

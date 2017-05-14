@@ -7,8 +7,6 @@ namespace TaskManager.DomainLayer
 {
     public class VEvent
     {
-        //не нужен, тк есть копии для базы
-        //public int Id { get; }
         public Person Creator { get; }
         public string Name { get; }
         public DateTime Start { private set; get; }
