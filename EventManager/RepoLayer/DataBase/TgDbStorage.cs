@@ -42,7 +42,8 @@ namespace TaskManager.RepoLayer.DataBase
         }
         public List<VEvent> GetAllUserEvent(int telegramId)
         {
-            return Db.Events
+            return Db
+                .Events
                 .AsEnumerable()
                 .Where(x => x.Creator.TelegramId == telegramId)
                 .Select(Mapper.Map<VEvent>)
