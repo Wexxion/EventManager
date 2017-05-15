@@ -1,6 +1,9 @@
-﻿namespace TaskManager.DomainLayer
+﻿
+using TaskManager.RepoLayer;
+
+namespace TaskManager.DomainLayer
 {
-    public class Location
+    public class Location : ValueType
     {
         public double Latitide { get; }
         public double Longtitude { get; }

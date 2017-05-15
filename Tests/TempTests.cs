@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TaskManager.AppLayer;
 using TaskManager.RepoLayer.Command;
-using TaskManager.RepoLayer.MessagerInterfaces;
+using TaskManager.RepoLayer.MessengerInterfaces;
 
 namespace Tests
 {
@@ -19,11 +20,11 @@ namespace Tests
         }
 
         [Pattern(typeof(SpecialCommandFirstArg), typeof(string[]))]
-        public Response HandleSpecialLexem(IncomingMessage message)
+        public BaseResponse HandleSpecialLexem(IRequest message)
         {
             if (message.Args.Count == 0)
-                return new Response("1");
-            return new Response(string.Join("+", message.Args));
+                return new BaseResponse("1");
+            return new BaseResponse(string.Join("+", message.Args));
         }
 
         public void NoAttributedMethod(List<string> args)
@@ -61,10 +62,10 @@ namespace Tests
         {
             var pattern = new BaseCommandPattern(typeof(SpecialCommandFirstArg), typeof(string[]));
             var testingInstance = new SpecialCommand();
-            var response = (Response)testingInstance
+            var response = (BaseResponse)testingInstance
                 .MethodsDict[pattern]
-                .Invoke(testingInstance, new object[] { new IncomingMessage("") });
-            Assert.AreEqual(response.Text, new Response("1").Text);
+                .Invoke(testingInstance, new object[] { new IRequest(null, "") });
+            Assert.AreEqual(response.Text, new BaseResponse("1").Text);
         }
 
         [TestMethod]
@@ -72,8 +73,8 @@ namespace Tests
         {
             var command = new SpecialCommand();
             Assert.AreEqual(
-                command.Execute(new IncomingMessage("/special three something")).Text,
-                new Response("three+something").Text);
+                command.Execute(new IRequest(null, "/special three something")).Text,
+                new BaseResponse("three+something").Text);
         }
 
         [TestMethod]
@@ -81,11 +82,11 @@ namespace Tests
         {
             var command = new SpecialCommand();
             Assert.ThrowsException<ArgumentException>(
-                () => command.Execute(new IncomingMessage("/special four three one")));
+                () => command.Execute(new IRequest(null, "/special four three one")));
             Assert.ThrowsException<ArgumentException>(
-                () => command.Execute(new IncomingMessage("")));
+                () => command.Execute(new IRequest(null, "")));
             Assert.ThrowsException<ArgumentException>(
-                () => command.Execute(new IncomingMessage("/special four smth")));
+                () => command.Execute(new IRequest(null, "/special four smth")));
         }
     }
 }

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using TaskManager.RepoLayer;
 
 
 namespace TaskManager.DomainLayer
 {
-    public class VEvent
+    public class VEvent : Entity
     {
         public Person Creator { get; }
         public string Name { get; }

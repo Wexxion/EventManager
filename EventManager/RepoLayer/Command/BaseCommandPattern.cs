@@ -67,8 +67,7 @@ namespace TaskManager.RepoLayer.Command
         {
             unchecked
             {
-                return ArgumentsPattern?
-                           .Aggregate(397, (current, arg) => current ^ arg.GetHashCode()) ?? 0;
+                return ArgumentsPattern?.Aggregate(397, (current, arg) => current ^ arg.GetHashCode()) ?? 0;
             }
         }
     }

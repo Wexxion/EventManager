@@ -1,20 +1,20 @@
 ﻿using System.Linq;
 using TaskManager.RepoLayer.Command;
-using TaskManager.RepoLayer.MessagerInterfaces;
+using TaskManager.RepoLayer.MessengerInterfaces;
 
-namespace TaskManager.AppLayer.Telegram
+namespace TaskManager.AppLayer.Commands
 {
-    class TGEventCommand: BaseCommand
+    class EventCommand: BaseCommand
     {
-        public TGEventCommand() : base("event")
+        public EventCommand() : base("event")
         {
         }
 
         [Pattern(typeof(ListArg), typeof(string[]))]
-        public Response GetEventsInfo(IncomingMessage msg)
+        public IResponse GetEventsInfo(IRequest msg)
         {
             var message = msg.Args.Skip(1); 
-            return new Response("Don't shout at me!"  + 
+            return new BaseResponse("Don't shout at me!"  + 
                 string.Join(" ", message.Select(x => x.ToUpper())));
         }
     }
