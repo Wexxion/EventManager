@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TaskManager.RepoLayer.Command;
-using TaskManager.RepoLayer.Messages;
+using TaskManager.RepoLayer.MessagerInterfaces;
 
 namespace Tests
 {
@@ -19,7 +19,7 @@ namespace Tests
         }
 
         [Pattern(typeof(SpecialCommandFirstArg), typeof(string[]))]
-        public Response HandleSpecialLexem(TgMessage message)
+        public Response HandleSpecialLexem(IncomingMessage message)
         {
             if (message.Args.Count == 0)
                 return new Response("1");
@@ -63,7 +63,7 @@ namespace Tests
             var testingInstance = new SpecialCommand();
             var response = (Response)testingInstance
                 .MethodsDict[pattern]
-                .Invoke(testingInstance, new object[] { new TgMessage("") });
+                .Invoke(testingInstance, new object[] { new IncomingMessage("") });
             Assert.AreEqual(response.Text, new Response("1").Text);
         }
 
@@ -72,7 +72,7 @@ namespace Tests
         {
             var command = new SpecialCommand();
             Assert.AreEqual(
-                command.Execute(new TgMessage("/special three something")).Text,
+                command.Execute(new IncomingMessage("/special three something")).Text,
                 new Response("three+something").Text);
         }
 
@@ -81,11 +81,11 @@ namespace Tests
         {
             var command = new SpecialCommand();
             Assert.ThrowsException<ArgumentException>(
-                () => command.Execute(new TgMessage("/special four three one")));
+                () => command.Execute(new IncomingMessage("/special four three one")));
             Assert.ThrowsException<ArgumentException>(
-                () => command.Execute(new TgMessage("")));
+                () => command.Execute(new IncomingMessage("")));
             Assert.ThrowsException<ArgumentException>(
-                () => command.Execute(new TgMessage("/special four smth")));
+                () => command.Execute(new IncomingMessage("/special four smth")));
         }
     }
 }

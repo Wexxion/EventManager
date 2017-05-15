@@ -1,4 +1,4 @@
-﻿using TaskManager.RepoLayer.Messages;
+﻿using TaskManager.RepoLayer.MessagerInterfaces;
 
 namespace TaskManager.RepoLayer.Command
 {

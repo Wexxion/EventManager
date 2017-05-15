@@ -107,7 +107,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppLayer\EventCommand.cs" />
+    <Compile Include="AppLayer\Telegram\TGEventCommand.cs" />
     <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="RepoLayer\Command\BaseCommand.cs" />
     <Compile Include="RepoLayer\Command\ArgumentPattern.cs" />
@@ -116,16 +116,16 @@
     <Compile Include="RepoLayer\Command\Response.cs" />
     <Compile Include="RepoLayer\DataBase\TgDbStorage.cs" />
     <Compile Include="RepoLayer\ITgStorage.cs" />
-    <Compile Include="RepoLayer\Messages\IResponsable.cs" />
+    <Compile Include="RepoLayer\MessagerInterfaces\IResponsable.cs" />
     <Compile Include="RepoLayer\Command\PatternAttribute.cs" />
-    <Compile Include="RepoLayer\Location.cs" />
-    <Compile Include="RepoLayer\Messages\IMessageHandler.cs" />
-    <Compile Include="AppLayer\SimpleMessageHandler.cs" />
-    <Compile Include="RepoLayer\Person.cs" />
+    <Compile Include="DomainLayer\Location.cs" />
+    <Compile Include="RepoLayer\MessagerInterfaces\IMessageHandler.cs" />
+    <Compile Include="AppLayer\Telegram\TGMessageHandler.cs" />
+    <Compile Include="DomainLayer\Person.cs" />
     <Compile Include="DomainLayer\VEvent.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RepoLayer\Messages\TGMessage.cs" />
+    <Compile Include="RepoLayer\MessagerInterfaces\IncomingMessage.cs" />
     <Compile Include="RepoLayer\DataBase\Context.cs" />
     <Compile Include="RepoLayer\DataBase\DbModel\LocationInDb.cs" />
     <Compile Include="RepoLayer\DataBase\DbModel\PersonInDb.cs" />

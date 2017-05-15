@@ -17,7 +17,7 @@ namespace TaskManager.RepoLayer.DataBase
 
         public void AddUser(Person user)
         {
-            var dbUser = Db.Users.Find(user.TelegramId);
+            var dbUser = Db.Users.Find(user.Id);
             if (dbUser == null)
             { 
                 Db.Users.Add(Mapper.Map<PersonInDb>(user));
@@ -26,11 +26,11 @@ namespace TaskManager.RepoLayer.DataBase
         }
         public void AddEvent(VEvent e)
         {
-            var dbUser = GetDbUser(e.Creator.TelegramId);
+            var dbUser = GetDbUser(e.Creator.Id);
             var dbEvent = Mapper.Map<VEventInDb>(e);
             dbEvent.Creator = dbUser;
             foreach (var user in e.Participants)
-                dbEvent.Participants.Add(GetDbUser(user.TelegramId));
+                dbEvent.Participants.Add(GetDbUser(user.Id));
             Db.Events.Add(dbEvent);
             Db.SaveChanges();
         }

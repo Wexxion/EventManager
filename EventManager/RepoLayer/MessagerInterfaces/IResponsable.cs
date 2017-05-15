@@ -1,4 +1,4 @@
-﻿namespace TaskManager.RepoLayer.Messages
+﻿namespace TaskManager.RepoLayer.MessagerInterfaces
 {
     public interface IResponsable
     {

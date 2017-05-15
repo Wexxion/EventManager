@@ -1,6 +1,4 @@
-﻿
-
-namespace TaskManager.RepoLayer.Command
+﻿namespace TaskManager.RepoLayer.Command
 {
     public enum PatternType
     {

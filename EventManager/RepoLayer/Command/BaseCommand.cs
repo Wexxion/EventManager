@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using TaskManager.RepoLayer.Messages;
+using TaskManager.RepoLayer.MessagerInterfaces;
 
 namespace TaskManager.RepoLayer.Command
 {
@@ -22,7 +22,7 @@ namespace TaskManager.RepoLayer.Command
                 if (attribute == null) continue;
                 if (method.GetParameters().Length != 1)
                     throw new ArgumentException("Attributed method should have only one parameter!");
-                if (method.GetParameters().First().ParameterType != typeof(TgMessage))
+                if (method.GetParameters().First().ParameterType != typeof(IncomingMessage))
                     throw new ArgumentException("Attributed method parameter should be MessageType!");
                 if (!method.ReturnType.GetInterfaces().Contains(typeof(IResponsable)))
                     throw new ArgumentException("Attributed method return type should be CommandResponse!");
@@ -30,7 +30,7 @@ namespace TaskManager.RepoLayer.Command
             }
         }
 
-        public IResponsable Execute(TgMessage message)
+        public IResponsable Execute(IncomingMessage message)
         {
             ExecuteEvent?.Invoke(this, EventArgs.Empty);
             foreach (var pattern in MethodsDict.Keys)

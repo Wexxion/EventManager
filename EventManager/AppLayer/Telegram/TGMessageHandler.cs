@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using TaskManager.RepoLayer;
+using TaskManager.DomainLayer;
 using TaskManager.RepoLayer.Command;
-using TaskManager.RepoLayer.Messages;
+using TaskManager.RepoLayer.MessagerInterfaces;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
-namespace TaskManager.AppLayer
+namespace TaskManager.AppLayer.Telegram
 {
     public class SimpleMessageHandler : IMessageHandler
     {
@@ -20,9 +20,9 @@ namespace TaskManager.AppLayer
 
         public SimpleMessageHandler()
         {
-            this.EventCommandDict = new Dictionary<string, BaseCommand>
+            EventCommandDict = new Dictionary<string, BaseCommand>
             {
-                {"event", new EventCommand()}
+                {"event", new TGEventCommand()}
             };
         }
 
@@ -30,7 +30,7 @@ namespace TaskManager.AppLayer
         {
             var info = message.From;
             var person = new Person(info.Id, info.FirstName, info.LastName, info.Username);
-            var tgMessage = new TgMessage(person, message.Text);
+            var tgMessage = new IncomingMessage(person, message.Text);
             if (!EventCommandDict.ContainsKey(tgMessage.Command))
                 return new Response("No such command implemented!");
 

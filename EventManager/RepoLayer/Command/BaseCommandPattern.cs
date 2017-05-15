@@ -54,7 +54,7 @@ namespace TaskManager.RepoLayer.Command
             if (obj == null) return false;
             if (ReferenceEquals(obj, this)) return true;
             var castedObj = (BaseCommandPattern) obj;
-            if (ReferenceEquals(this.ArgumentsPattern, castedObj.ArgumentsPattern)) return true;
+            if (ReferenceEquals(ArgumentsPattern, castedObj.ArgumentsPattern)) return true;
             return ArgumentsPattern?.SequenceEqual(castedObj.ArgumentsPattern) ?? false;
         }
 
