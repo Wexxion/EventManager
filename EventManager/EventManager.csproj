@@ -114,7 +114,6 @@
     <Compile Include="RepoLayer\Command\BaseCommandPattern.cs" />
     <Compile Include="RepoLayer\Command\PatternType.cs" />
     <Compile Include="RepoLayer\Command\Response.cs" />
-    <Compile Include="RepoLayer\Command\BaseCommandTypes.cs" />
     <Compile Include="RepoLayer\DataBase\TgDbStorage.cs" />
     <Compile Include="RepoLayer\ITgStorage.cs" />
     <Compile Include="RepoLayer\Messages\IResponsable.cs" />
