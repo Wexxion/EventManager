@@ -1,4 +1,5 @@
-﻿using TaskManager.AppLayer;
+﻿using Ninject;
+using TaskManager.AppLayer;
 using TaskManager.UILayer;
 
 namespace TaskManager
@@ -7,8 +8,8 @@ namespace TaskManager
     {
         public static void Main(string[] args)
         {
-            var telegramBot = new TelegramMessengerBot("token", new MessageHandler());
-            telegramBot.Start();
+            NinjectConfig.Configure("token");
+            NinjectConfig.GetKernel().Get<TelegramMessengerBot>().Start();
         }
     }
 }

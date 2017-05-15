@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TaskManager.AppLayer.Commands;
 using TaskManager.RepoLayer.Command;
 using TaskManager.RepoLayer.MessengerInterfaces;
@@ -9,12 +10,9 @@ namespace TaskManager.AppLayer
     public class MessageHandler
     {
         private Dictionary<string, BaseCommand> EventCommandDict { get; }
-        public MessageHandler()
+        public MessageHandler(IEnumerable<BaseCommand> commans)
         {
-            EventCommandDict = new Dictionary<string, BaseCommand>
-            {
-                {"event", new EventCommand()}
-            };
+            EventCommandDict = commans.ToDictionary(x => x.Name, x => x);
         }
         public IResponse ProcessMessage(IRequest message)
         {
