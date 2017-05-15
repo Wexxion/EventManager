@@ -8,7 +8,7 @@ namespace TaskManager
     {
         public static void Main(string[] args)
         {
-            NinjectConfig.Configure("token");
+            NinjectConfig.Configure("342936471:AAEgFkblOUKv2qJ8o30zG0Dji8trlo2sEKM");
             NinjectConfig.GetKernel().Get<TelegramMessengerBot>().Start();
         }
     }

@@ -10,10 +10,15 @@ namespace TaskManager.AppLayer
     public class MessageHandler
     {
         private Dictionary<string, BaseCommand> EventCommandDict { get; }
-        public MessageHandler(IEnumerable<BaseCommand> commans)
+        public MessageHandler(BaseCommand[] commans)
         {
             EventCommandDict = commans.ToDictionary(x => x.Name, x => x);
         }
+
+        private MessageHandler()
+        {
+        }
+
         public IResponse ProcessMessage(IRequest message)
         {
             if (!EventCommandDict.ContainsKey(message.Command))
