@@ -22,10 +22,10 @@ namespace TaskManager.RepoLayer.Command
                 if (attribute == null) continue;
                 if (method.GetParameters().Length != 1)
                     throw new ArgumentException("Attributed method should have only one parameter!");
-                if (method.GetParameters().First().GetType().GetInterfaces().Contains(typeof(IRequest)))
-                    throw new ArgumentException("Attributed method parameter should implement IRequest!");
-                if (!method.ReturnType.GetInterfaces().Contains(typeof(IResponse)))
-                    throw new ArgumentException("Attributed method return type should implement IResponse!");
+                if (method.GetParameters().First().GetType() == typeof(IRequest))
+                    throw new ArgumentException("Attributed method parameter should be IRequest!");
+                if (method.ReturnType != typeof(IResponse))
+                    throw new ArgumentException("Attributed method return type should be IResponse!");
                 MethodsDict.Add(attribute.Pattern, method);
             }
         }

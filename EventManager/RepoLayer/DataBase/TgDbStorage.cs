@@ -39,7 +39,7 @@ namespace TaskManager.RepoLayer.DataBase
         {
             return Mapper.Map<Person>(GetDbUser(id));
         }
-        private PersonInDb GetDbUser(int id)
+        private PersonInDb GetDbUser(long id)
         {
             return Db
                  .Users

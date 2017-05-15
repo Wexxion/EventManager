@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TaskManager.AppLayer;
 using TaskManager.DomainLayer;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 
 namespace TaskManager.UILayer
 {
@@ -33,13 +29,23 @@ namespace TaskManager.UILayer
         }
         private async void BotOnMessageReceived(object sender, MessageEventArgs messageEventArgs)
         {
-            var message = AnalyzeIncomingMessage(messageEventArgs.Message);
-            var answer = Handler.ProcessMessage(message).Text;
-            await Bot.SendTextMessageAsync(message.Author.Id, answer);
+            var message = messageEventArgs.Message;
+            try
+            {
+                var request = AnalyzeIncomingMessage(message);
+                var answer = Handler.ProcessMessage(request).Text;
+                await Bot.SendTextMessageAsync(message.Chat.Id, answer);
+            }
+            catch (ArgumentException e)
+            {
+                await Bot.SendTextMessageAsync(message.Chat.Id, e.Message);
+            }
         }
 
         private BaseRequest AnalyzeIncomingMessage(Message message)
         {
+            if (message.Type != MessageType.TextMessage)
+                throw new ArgumentException($"{message.Type} is not supported yet =[");
             var sender = message.Chat;
             var author = new Person(sender.Id, sender.FirstName, sender.LastName, sender.Username);
             return new BaseRequest(author, message.Text);
