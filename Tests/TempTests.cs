@@ -6,13 +6,19 @@ using TaskManager.RepoLayer.Messages;
 
 namespace Tests
 {
-    class SpecialCommand : BaseCommand
+    public enum SpecialCommandFirstArg
+    {
+        One,
+        Two,
+        Three
+    }
+    public class SpecialCommand : BaseCommand
     {
         public SpecialCommand() : base("special")
         {
         }
 
-        [Pattern("[listed: one, two, three] [any]")]
+        [Pattern(typeof(SpecialCommandFirstArg), typeof(string[]))]
         public Response HandleSpecialLexem(TgMessage message)
         {
             if (message.Args.Count == 0)
@@ -45,7 +51,7 @@ namespace Tests
         [TestMethod]
         public void AttributedMethodsAreInDict()
         {
-            var pattern = new BaseCommandPattern("[listed: two, one, three] [any]");
+            var pattern = new BaseCommandPattern(typeof(SpecialCommandFirstArg), typeof(string[]));
             var testingInstance = new SpecialCommand();
             Assert.IsTrue(testingInstance.MethodsDict.ContainsKey(pattern));
         }
@@ -53,11 +59,11 @@ namespace Tests
         [TestMethod]
         public void AttributedMethodIsInvokable()
         {
-            var pattern = new BaseCommandPattern("[listed: two, one, three] [any]");
+            var pattern = new BaseCommandPattern(typeof(SpecialCommandFirstArg), typeof(string[]));
             var testingInstance = new SpecialCommand();
             var response = (Response)testingInstance
                 .MethodsDict[pattern]
-                .Invoke(testingInstance, new object[] {new TgMessage("")});
+                .Invoke(testingInstance, new object[] { new TgMessage("") });
             Assert.AreEqual(response.Text, new Response("1").Text);
         }
 

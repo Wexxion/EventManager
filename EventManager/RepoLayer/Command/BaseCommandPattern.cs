@@ -7,42 +7,46 @@ namespace TaskManager.RepoLayer.Command
     public class BaseCommandPattern
     {
         public List<ArgumentPattern> ArgumentsPattern { get; }
-        public BaseCommandPattern(string pattern)
+
+        public BaseCommandPattern(params Type[] args)
         {
-            //values such as "[listed: x,...z]... ...[any] are accepted"
-            ArgumentsPattern = new List<ArgumentPattern>();
-            var argsInfo = pattern
-                .Replace(" ", "")
-                .Split(new [] {"]["}, StringSplitOptions.RemoveEmptyEntries)
-                .Select(x => x.Replace("]", "").Replace("[", "").Split(':')).ToList();
-            foreach (var argument in argsInfo)
+            var argPattern = new List<ArgumentPattern>();
+            var stringArrayFlag = false;
+            foreach (var arg in args)
             {
-                if (argument.Length > 2)
-                    throw new ArgumentException("Arg value can contain only one ':'!");
-                switch (argument[0])
+                if (stringArrayFlag) throw new ArgumentException("'Enum' can't stay after 'string[]'!");
+                if (arg.IsEnum)
                 {
-                    case "listed":
-                        ArgumentsPattern.Add(new ArgumentPattern(argument[1].Split(',').ToList()));
-                        break;
-                    case "any":
-                        ArgumentsPattern.Add(new ArgumentPattern(PatternType.AnyString));
-                        break;
-                    default:
-                        throw new ArgumentException(
-                            "Incorrect argument pattern type! " +
-                            "Values such as \"[listed: x,..., z] ... [any] are accepted\"!");
+                    var enumValues = Enum.GetValues(arg);
+                    var valuesList = new List<string>();
+                    foreach (var value in enumValues)
+                    {
+                        var enumValue = value.ToString().ToLower();
+                        valuesList.Add(enumValue);
+                    }
+                    argPattern.Add(new ArgumentPattern(valuesList));
                 }
+                else if (arg == typeof(string[]))
+                {
+                    stringArrayFlag = true;
+                    argPattern.Add(new ArgumentPattern(PatternType.AnyString));
+                }
+                else
+                    throw new ArgumentException(
+                        "Only 'Enum' or 'string[]' types are acceptable in pattern!");
+
             }
+            this.ArgumentsPattern = argPattern;
         }
 
         public bool DoesPatternAcceptArguments(List<string> args)
         {
-            if (args.Count != ArgumentsPattern.Count) return false;
-            for (var i = 0; i < args.Count; i++)
+            if (ArgumentsPattern.Count > args.Count) return false;
+            for (var i = 0; i < ArgumentsPattern.Count; i++)
             {
                 if (ArgumentsPattern[i].Type == PatternType.AnyString)
-                    continue;
-                if (!ArgumentsPattern[i].AvaliableArguments.Contains(args[i]))
+                    return true;
+                if (!ArgumentsPattern[i].AvaliableArguments.Contains(args[i].ToLower()))
                     return false;
             }
             return true;

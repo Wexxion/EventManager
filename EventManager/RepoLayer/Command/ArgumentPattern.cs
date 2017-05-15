@@ -35,10 +35,8 @@ namespace TaskManager.RepoLayer.Command
             return sameArgs && sameTypes;
         }
 
-        protected bool Equals(ArgumentPattern other)
-        {
-            return Equals(AvaliableArguments, other.AvaliableArguments);
-        }
+        protected bool Equals(ArgumentPattern other) => 
+            Equals(AvaliableArguments, other.AvaliableArguments);
 
         public override int GetHashCode()
         {
@@ -46,8 +44,7 @@ namespace TaskManager.RepoLayer.Command
             {
                 return AvaliableArguments.OrderBy(x => x).Aggregate(
                     ((int)Type * 397), 
-                    (current, argument) => current ^ argument.GetHashCode()
-                    );
+                    (current, argument) => current ^ argument.GetHashCode());
             }
         }
 

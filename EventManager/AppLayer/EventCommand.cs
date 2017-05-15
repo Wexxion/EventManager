@@ -1,4 +1,5 @@
-﻿using TaskManager.RepoLayer.Command;
+﻿using System.Linq;
+using TaskManager.RepoLayer.Command;
 using TaskManager.RepoLayer.Messages;
 
 namespace TaskManager.AppLayer
@@ -9,10 +10,18 @@ namespace TaskManager.AppLayer
         {
         }
 
-        [Pattern("[listed: list]")]
+        [Pattern(typeof(ListArg), typeof(string[]))]
         public Response GetEventsInfo(TgMessage msg)
         {
-            return new Response("No info, should implement it!");
+            var message = msg.Args.Skip(1); 
+            return new Response("Don't shout at me!" + string.Join(" ", message));
         }
+    }
+
+    enum ListArg
+    {
+        List,
+        Listed,
+        SomeArg
     }
 }

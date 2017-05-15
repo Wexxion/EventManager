@@ -7,9 +7,10 @@ namespace TaskManager.RepoLayer.Command
     public class PatternAttribute: Attribute
     {
         public BaseCommandPattern Pattern { get; }
-        public PatternAttribute(string pattern)
+
+        public PatternAttribute(params Type[] types)
         {
-            Pattern = new BaseCommandPattern(pattern);
+            Pattern = new BaseCommandPattern(types);
         }
     }
 }
