@@ -14,7 +14,8 @@ namespace TaskManager.AppLayer
         public Response GetEventsInfo(TgMessage msg)
         {
             var message = msg.Args.Skip(1); 
-            return new Response("Don't shout at me!" + string.Join(" ", message));
+            return new Response("Don't shout at me!"  + 
+                string.Join(" ", message.Select(x => x.ToUpper())));
         }
     }
 

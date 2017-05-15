@@ -18,12 +18,9 @@ namespace TaskManager.RepoLayer.Command
                 if (arg.IsEnum)
                 {
                     var enumValues = Enum.GetValues(arg);
-                    var valuesList = new List<string>();
-                    foreach (var value in enumValues)
-                    {
-                        var enumValue = value.ToString().ToLower();
-                        valuesList.Add(enumValue);
-                    }
+                    var valuesList = (
+                        from object value in enumValues select value.ToString().ToLower())
+                        .ToList();
                     argPattern.Add(new ArgumentPattern(valuesList));
                 }
                 else if (arg == typeof(string[]))
@@ -36,7 +33,7 @@ namespace TaskManager.RepoLayer.Command
                         "Only 'Enum' or 'string[]' types are acceptable in pattern!");
 
             }
-            this.ArgumentsPattern = argPattern;
+            ArgumentsPattern = argPattern;
         }
 
         public bool DoesPatternAcceptArguments(List<string> args)

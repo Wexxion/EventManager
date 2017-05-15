@@ -1,6 +1,5 @@
 ﻿using TaskManager.RepoLayer.Messages;
 
-
 namespace TaskManager.RepoLayer.Command
 {
     public class Response : IResponsable
