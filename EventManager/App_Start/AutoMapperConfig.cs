@@ -1,10 +1,9 @@
 ﻿using System;
 using AutoMapper;
 using TaskManager.DomainLayer;
-using TaskManager.RepoLayer;
 using TaskManager.RepoLayer.DataBase.DbModel;
 
-namespace TaskManager.App_Start
+namespace TaskManager
 {
     public class AutoMapperConfig
     {

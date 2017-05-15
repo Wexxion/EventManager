@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using TaskManager.DomainLayer;
@@ -12,7 +11,7 @@ namespace TaskManager.RepoLayer.DataBase
         private Context Db { get; }
         public TgDbStorage()
         {
-            this.Db = new Context("TestBot");
+            Db = new Context("TestBot");
         }
 
         public void AddUser(Person user)

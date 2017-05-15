@@ -2,6 +2,6 @@
 {
     interface IMessengerBot
     {
-        void Initialize(string token);
+        void Start();
     }
 }

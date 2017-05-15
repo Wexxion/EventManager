@@ -1,4 +1,5 @@
-﻿using TaskManager.UILayer;
+﻿using TaskManager.AppLayer;
+using TaskManager.UILayer;
 
 namespace TaskManager
 {
@@ -6,8 +7,8 @@ namespace TaskManager
     {
         public static void Main(string[] args)
         {
-            var telegramBot = new TelegramMessengerBot();
-            telegramBot.Initialize("token");
+            var telegramBot = new TelegramMessengerBot("token", new MessageHandler());
+            telegramBot.Start();
         }
     }
 }

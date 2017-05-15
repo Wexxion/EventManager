@@ -10,17 +10,17 @@ namespace TaskManager.UILayer
 {
     public class TelegramMessengerBot : IMessengerBot
     {
-        private TelegramBotClient Bot { get; set; }
+        private TelegramBotClient Bot { get;}
         private MessageHandler Handler { get; }
 
-        public TelegramMessengerBot()
-        {
-           Handler = new MessageHandler();
-        }
-
-        public void Initialize(string token)
+        public TelegramMessengerBot(string token, MessageHandler handler)
         {
             Bot = new TelegramBotClient(token);
+            Handler = handler;
+        }
+
+        public void Start()
+        {
             Bot.OnMessage += BotOnMessageReceived;
 
             Bot.StartReceiving();

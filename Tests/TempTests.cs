@@ -20,7 +20,7 @@ namespace Tests
         }
 
         [Pattern(typeof(SpecialCommandFirstArg), typeof(string[]))]
-        public BaseResponse HandleSpecialLexem(IRequest message)
+        public IResponse HandleSpecialLexem(IRequest message)
         {
             if (message.Args.Count == 0)
                 return new BaseResponse("1");
@@ -64,7 +64,7 @@ namespace Tests
             var testingInstance = new SpecialCommand();
             var response = (BaseResponse)testingInstance
                 .MethodsDict[pattern]
-                .Invoke(testingInstance, new object[] { new IRequest(null, "") });
+                .Invoke(testingInstance, new object[] { new BaseRequest(null, ""),  });
             Assert.AreEqual(response.Text, new BaseResponse("1").Text);
         }
 
@@ -73,7 +73,7 @@ namespace Tests
         {
             var command = new SpecialCommand();
             Assert.AreEqual(
-                command.Execute(new IRequest(null, "/special three something")).Text,
+                command.Execute(new BaseRequest(null, "/special three something")).Text,
                 new BaseResponse("three+something").Text);
         }
 
@@ -82,11 +82,11 @@ namespace Tests
         {
             var command = new SpecialCommand();
             Assert.ThrowsException<ArgumentException>(
-                () => command.Execute(new IRequest(null, "/special four three one")));
+                () => command.Execute(new BaseRequest(null, "/special four three one")));
             Assert.ThrowsException<ArgumentException>(
-                () => command.Execute(new IRequest(null, "")));
+                () => command.Execute(new BaseRequest(null, "")));
             Assert.ThrowsException<ArgumentException>(
-                () => command.Execute(new IRequest(null, "/special four smth")));
+                () => command.Execute(new BaseRequest(null, "/special four smth")));
         }
     }
 }
