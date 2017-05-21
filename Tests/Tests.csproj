@@ -58,9 +58,21 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EventManager\EventManager.csproj">
-      <Project>{5fe728fa-5abc-4231-a085-b3fdeec2d85d}</Project>
-      <Name>EventManager</Name>
+    <ProjectReference Include="..\AppLayer\AppLayer.csproj">
+      <Project>{a5107fc1-8671-4674-8df9-7c894b8792cd}</Project>
+      <Name>AppLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DomainLayer\DomainLayer.csproj">
+      <Project>{7acc97f8-7b28-4cb4-a823-6c6f97483a9b}</Project>
+      <Name>DomainLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RepoLayer\RepoLayer.csproj">
+      <Project>{36aa6ed5-2eac-490c-a2e3-6464b1f4167f}</Project>
+      <Name>RepoLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UILayer\UILayer.csproj">
+      <Project>{b0e3c81f-8859-4fcf-9d9c-58f8dd07358f}</Project>
+      <Name>UILayer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

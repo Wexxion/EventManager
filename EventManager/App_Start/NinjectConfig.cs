@@ -1,8 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Ninject;
-using TaskManager.AppLayer;
-using TaskManager.AppLayer.Commands;
+using TaskManager.App_Start;
+using TaskManager.DomainLayer;
+using TaskManager.RepoLayer;
 using TaskManager.RepoLayer.Command;
+using TaskManager.UILayer;
 using Telegram.Bot;
 
 namespace TaskManager
@@ -12,11 +17,12 @@ namespace TaskManager
         private static IKernel kernel = new StandardKernel();
         public static void Configure(string token)
         {
-            //тут добавлять команды
-            kernel.Bind<BaseCommand>().To<EventCommand>();
-            //------------------------------
-            kernel.Bind<TelegramBotClient>()
-                .ToConstructor(x => new TelegramBotClient(token));
+            foreach (var command in new CommandLoader("Plugins").GetCommands())
+                kernel.Bind<BaseCommand>().To(command.GetType());
+
+            kernel.Bind<TelegramBotClient>().ToConstructor(x => new TelegramBotClient(token));
+
+            kernel.Bind<IMessengerBot>().To<TelegramMessengerBot>();
         }
         public static IKernel GetKernel()
         {
