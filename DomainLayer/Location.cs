@@ -1,5 +1,4 @@
-﻿
-using TaskManager.RepoLayer;
+﻿using ValueType = TaskManager.RepoLayer.ValueType;
 
 namespace TaskManager.DomainLayer
 {

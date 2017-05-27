@@ -2,14 +2,14 @@
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.IO;
-using TaskManager.RepoLayer.Command;
+using RepoLayer.Session;
 
 namespace TaskManager.App_Start
 {
     class CommandLoader
     {
-        [ImportMany(typeof(BaseCommand))]
-        private IEnumerable<BaseCommand> Commands { get; set; }
+        [ImportMany(typeof(BaseBotSession))]
+        private IEnumerable<BaseBotSession> Commands { get; set; }
 
         public CommandLoader(string pathToPlugins)
         {
@@ -20,7 +20,7 @@ namespace TaskManager.App_Start
             container.ComposeParts(this);
         }
 
-        public IEnumerable<BaseCommand> GetCommands()
+        public IEnumerable<BaseBotSession> GetCommands()
         {
             return Commands;
         }

@@ -39,6 +39,8 @@ namespace TaskManager.DomainLayer
             Participants = new HashSet<Person> {Creator};
         }
 
+        public void SetName(string name) => Name = name;
+        public void SetCreator(Person creator) => Creator = creator;
         public void SetDescription(string description) => Description = description;
         public void SetLocation(Location location) => Location = location;
         public void SetFirstReminder(TimeSpan span) => FirstReminder = span;
