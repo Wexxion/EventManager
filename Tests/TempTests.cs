@@ -23,8 +23,8 @@ namespace Tests
         public IResponse HandleSpecialLexem(IRequest message)
         {
             if (message.Args.Count == 0)
-                return new BaseResponse("1");
-            return new BaseResponse(string.Join("+", message.Args));
+                return new TextResponse("1");
+            return new TextResponse(string.Join("+", message.Args));
         }
 
         public void NoAttributedMethod(List<string> args)
@@ -62,10 +62,10 @@ namespace Tests
         {
             var pattern = new BaseCommandPattern(typeof(SpecialCommandFirstArg), typeof(string[]));
             var testingInstance = new SpecialCommand();
-            var response = (BaseResponse)testingInstance
+            var response = (TextResponse)testingInstance
                 .MethodsDict[pattern]
                 .Invoke(testingInstance, new object[] { new BaseRequest(null, ""),  });
-            Assert.AreEqual(response.Text, new BaseResponse("1").Text);
+            Assert.AreEqual(response.Text, new TextResponse("1").Text);
         }
 
         [TestMethod]
@@ -74,7 +74,7 @@ namespace Tests
             var command = new SpecialCommand();
             Assert.AreEqual(
                 command.Execute(new BaseRequest(null, "/special three something")).Text,
-                new BaseResponse("three+something").Text);
+                new TextResponse("three+something").Text);
         }
 
         [TestMethod]

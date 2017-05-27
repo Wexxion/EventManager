@@ -1,0 +1,5 @@
+E:\Projects\OOP3\EventManager\EventManager\bin\Debug\Plugins\LoginSession.dll
+E:\Projects\OOP3\EventManager\EventManager\bin\Debug\Plugins\LoginSession.pdb
+E:\Projects\OOP3\EventManager\Sessions\LoginSession\obj\Debug\LoginSession.csprojResolveAssemblyReference.cache
+E:\Projects\OOP3\EventManager\Sessions\LoginSession\obj\Debug\LoginSession.dll
+E:\Projects\OOP3\EventManager\Sessions\LoginSession\obj\Debug\LoginSession.pdb

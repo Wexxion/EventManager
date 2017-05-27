@@ -1,0 +1,9 @@
+E:\Projects\OOP3\EventManager\RepoLayer\bin\Debug\RepoLayer.dll
+E:\Projects\OOP3\EventManager\RepoLayer\bin\Debug\RepoLayer.pdb
+E:\Projects\OOP3\EventManager\RepoLayer\obj\Debug\RepoLayer.dll
+E:\Projects\OOP3\EventManager\RepoLayer\obj\Debug\RepoLayer.pdb
+E:\Projects\OOP3\EventManager\RepoLayer\bin\Debug\RepoLayer.dll.config
+E:\Projects\OOP3\EventManager\EventManager\bin\Debug\RepoLayer.dll.config
+E:\Projects\OOP3\EventManager\EventManager\bin\Debug\RepoLayer.dll
+E:\Projects\OOP3\EventManager\EventManager\bin\Debug\RepoLayer.pdb
+E:\Projects\OOP3\EventManager\RepoLayer\obj\Debug\RepoLayer.csprojResolveAssemblyReference.cache
