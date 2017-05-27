@@ -43,6 +43,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -53,17 +54,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Command\ArgumentPattern.cs" />
-    <Compile Include="Command\BaseCommand.cs" />
-    <Compile Include="Command\BaseCommandPattern.cs" />
-    <Compile Include="Command\PatternAttribute.cs" />
-    <Compile Include="Command\PatternType.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="MessengerInterfaces\IRequest.cs" />
     <Compile Include="MessengerInterfaces\IResponse.cs" />
     <Compile Include="NoSqlDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Session\BaseBotSession.cs" />
+    <Compile Include="Session\SessionCommand.cs" />
     <Compile Include="StorageFactory.cs" />
     <Compile Include="ValueType.cs" />
   </ItemGroup>
@@ -71,6 +69,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

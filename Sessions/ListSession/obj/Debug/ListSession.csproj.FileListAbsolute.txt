@@ -1,0 +1,5 @@
+E:\Projects\OOP3\EventManager\EventManager\bin\Debug\Plugins\ListSession.dll
+E:\Projects\OOP3\EventManager\EventManager\bin\Debug\Plugins\ListSession.pdb
+E:\Projects\OOP3\EventManager\Sessions\ListSession\obj\Debug\ListSession.csprojResolveAssemblyReference.cache
+E:\Projects\OOP3\EventManager\Sessions\ListSession\obj\Debug\ListSession.dll
+E:\Projects\OOP3\EventManager\Sessions\ListSession\obj\Debug\ListSession.pdb
