@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using AppLayer;
 using Ninject;
-using TaskManager.AppLayer;
-using TaskManager.AppLayer.Commands;
-using TaskManager.RepoLayer.Command;
+using RepoLayer.Session;
+using TaskManager.App_Start;
+using TaskManager.UILayer;
 using Telegram.Bot;
 
 namespace TaskManager
@@ -10,13 +10,13 @@ namespace TaskManager
     public static class NinjectConfig
     {
         private static IKernel kernel = new StandardKernel();
-        public static void Configure(string token)
+        public static void Configure(Configuration config)
         {
-            //тут добавлять команды
-            kernel.Bind<BaseCommand>().To<EventCommand>();
-            //------------------------------
-            kernel.Bind<TelegramBotClient>()
-                .ToConstructor(x => new TelegramBotClient(token));
+            foreach (var command in new CommandLoader("Plugins").GetCommands())
+                kernel.Bind<BaseBotSession>().To(command.GetType());
+            kernel.Bind<Reminder>().ToConstructor(x => new Reminder(config.RemindTimeOut));
+            kernel.Bind<TelegramBotClient>().ToConstructor(x => new TelegramBotClient(config.Token));
+            kernel.Bind<IMessengerBot>().To<TelegramMessengerBot>();
         }
         public static IKernel GetKernel()
         {
