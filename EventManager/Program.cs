@@ -20,10 +20,11 @@ namespace TaskManager
             var config = new Configuration
             {
                 DbName = "storage.db",
-                Token = "token"
+                Token = "token",
+                RemindTimeOut = 1000 * 10
             };
             StorageFactory.dbName = config.DbName;
-            NinjectConfig.Configure(config.Token);
+            NinjectConfig.Configure(config);
             var bot = NinjectConfig.GetKernel().Get<IMessengerBot>();
             bot.OnRequest += request =>
             {

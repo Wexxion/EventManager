@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AppLayer;
 using TaskManager.AppLayer;
 using TaskManager.DomainLayer;
 using TaskManager.RepoLayer.MessengerInterfaces;
@@ -17,12 +18,13 @@ namespace TaskManager.UILayer
     {
         private TelegramBotClient Bot { get;}
         private SessionHandler Handler { get; }
-
+        private Reminder Reminder { get; }
         public event Action<IRequest> OnRequest;
         public event Action<Exception> OnError;
-        // TODO: добавить напоминатель
-        public TelegramMessengerBot(TelegramBotClient bot, SessionHandler handler)
+        public TelegramMessengerBot(TelegramBotClient bot, SessionHandler handler, Reminder reminder)
         {
+            Reminder = reminder;
+            Reminder.OnRemind += BotOnRemind;
             Bot = bot;
             Handler = handler;
             Bot.OnMessage += BotOnMessageReceived;
@@ -37,6 +39,17 @@ namespace TaskManager.UILayer
         {
             Bot.StopReceiving();
         }
+
+
+        private async void BotOnRemind(IResponse response)
+        {
+            if (response is RemindResponse)
+            {
+                var remindResponse = (RemindResponse) response;
+                await Bot.SendTextMessageAsync(remindResponse.RemindId, remindResponse.Text);
+            }
+        }
+
         private async void BotOnMessageReceived(object sender, MessageEventArgs messageEventArgs)
         {
             /* 
