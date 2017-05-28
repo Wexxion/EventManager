@@ -49,36 +49,38 @@ namespace TaskManager.UILayer
                 await Bot.SendTextMessageAsync(remindResponse.RemindId, remindResponse.Text);
             }
         }
+        
+        /* 
+               по идее разных видов Response может быть много и каждый из них надо по особенному обрабатывать,
+               думаю можно эту логику вынести в какой-нибудь responseHandler             
+        */
+        private BotData ResponseAnalizer(IResponse response)
+        {
+            if (response is ButtonResponse)
+            {
+                var buttonAnswer = (ButtonResponse) response;
+                return new BotData(buttonAnswer.Text, GetKeyboard(buttonAnswer.ButtonNames));
+            }
+            if (response is TextResponse)
+            {
+                var textAnswer = (TextResponse) response;
+                return new BotData(textAnswer.Text);
+            }
+            return new BotData(response.Text);
+        }
 
         private async void BotOnMessageReceived(object sender, MessageEventArgs messageEventArgs)
         {
-            /* 
-               по идее разных видов Response может быть много и каждый из них надо по особенному обрабатывать,
-               думаю можно эту логику вынести в какой-нибудь responseHandler             
-            */
             var message = messageEventArgs.Message;
             try
             {
                 var request = AnalyzeIncomingMessage(message);
                 OnRequest?.Invoke(request);
                 var response = Handler.ProcessMessage(request);
-
-                //TODO: проверка на null
-                if (response is ButtonResponse)
-                {
-                    var buttonAnswer = (ButtonResponse) response;
-                    await Bot.SendTextMessageAsync(message.Chat.Id, buttonAnswer.Text,
-                        replyMarkup: GetKeyboard(buttonAnswer.ButtonNames));
-                }
-                else if (response is TextResponse)
-                {
-                    var textAnswer = (TextResponse) response;
-                    await Bot.SendTextMessageAsync(message.Chat.Id, textAnswer.Text);
-                }
-                else
-                {
-                    await Bot.SendTextMessageAsync(message.Chat.Id, response.Text);
-                }
+                var data = ResponseAnalizer(response);
+                await Bot.SendTextMessageAsync(message.Chat.Id, data.Text
+                    ,replyMarkup: data.Markup
+                    );
             }
             catch (ArgumentException e)
             {

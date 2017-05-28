@@ -15,19 +15,20 @@ namespace LoginSession
     [Export(typeof(BaseBotSession))]
     public class LoginSession : BaseBotSession
     {
-        private IRepository<Person> persons;
-        public LoginSession() : base("Login")
+        private IRepository<Person> PersonsStorage { get; set; }
+        [ImportingConstructor]
+        public LoginSession([Import("PersonStorage")]IRepository<Person> personsStorage) : base("Login")
         {
-            persons = StorageFactory.GetRepository<Person>();
+            PersonsStorage = personsStorage;
         }
 
         public override IResponse Execute(IRequest message)
         {
             var author = (Person)message.Author;
-            var tAuthor = persons.Get(x => x.TelegramId == author.TelegramId);
+            var tAuthor = PersonsStorage.Get(x => x.TelegramId == author.TelegramId);
             if (tAuthor != null)
                 return new TextResponse("I already know you", ResponseStatus.Close);
-            persons.Add(author);
+            PersonsStorage.Add(author);
             return new TextResponse("I remember you", ResponseStatus.Close);
         }
     }

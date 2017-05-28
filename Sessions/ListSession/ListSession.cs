@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using RepoLayer;
 using RepoLayer.Session;
 using TaskManager.AppLayer;
@@ -15,15 +12,17 @@ namespace ListSession
     [Export(typeof(BaseBotSession))]
     public class ListSession : BaseBotSession
     {
-        public ListSession() : base("All users")
+        private IRepository<Person> PersonsStorage { get; set; }
+        [ImportingConstructor]
+        public ListSession([Import("PersonStorage")]IRepository<Person> personStorage) : base("All users")
         {
+            PersonsStorage = personStorage;
         }
 
         public override IResponse Execute(IRequest message)
         {
             var allPersons = new StringBuilder();
-            var persons = StorageFactory
-                .GetRepository<Person>()
+            var persons = PersonsStorage
                 .GetAll()
                 .ToArray();
             if (persons.Length == 0)

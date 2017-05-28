@@ -9,7 +9,7 @@ using TaskManager.RepoLayer;
 
 namespace RepoLayer
 {
-    class NoSqlDb<TEntity> : IRepository<TEntity>
+    public class NoSqlDb<TEntity> : IRepository<TEntity>
         where TEntity : Entity
     {
         private LiteCollection<TEntity> collection;

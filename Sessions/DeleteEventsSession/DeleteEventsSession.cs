@@ -15,14 +15,16 @@ namespace DeleteEventsSession
     [Export(typeof(BaseBotSession))]
     public class DeleteEventsSession : BaseBotSession
     {
-        public DeleteEventsSession() : base("Delete all events")
+        private IRepository<VEvent> EventStorage { get; set; }
+        [ImportingConstructor]
+        public DeleteEventsSession([Import("EventStorage")]IRepository<VEvent> eventStorage) : base("Delete all events")
         {
+            EventStorage = eventStorage;
         }
 
         public override IResponse Execute(IRequest message)
         {
-            StorageFactory.GetRepository<VEvent>()
-                .Delete(x => x.Creator.TelegramId == ((Person)message.Author).TelegramId);
+            EventStorage.Delete(x => x.Creator.TelegramId == ((Person)message.Author).TelegramId);
             return new TextResponse("All your events have been deleted",ResponseStatus.Close);
         }
     }

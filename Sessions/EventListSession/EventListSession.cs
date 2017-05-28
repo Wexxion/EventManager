@@ -16,10 +16,10 @@ namespace EventListSession
     public class EventListSession : BaseBotSession
     {
         private IRepository<VEvent> EventStorage { get; set; }
-
-        public EventListSession() : base("My events")
+        [ImportingConstructor]
+        public EventListSession([Import("EventStorage")]IRepository<VEvent> eventStorage) : base("My events")
         {
-            EventStorage = StorageFactory.GetRepository<VEvent>();
+            EventStorage = eventStorage;
         }
 
         private string EventToString(VEvent e)

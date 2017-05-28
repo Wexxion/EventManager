@@ -14,6 +14,7 @@ namespace TaskManager.AppLayer
         {
             EventCommands = sessions
                 .ToDictionary(x => x.Name,x => x);
+            Console.WriteLine(EventCommands.Count);
         }
 
         public IResponse ProcessMessage(IRequest message)

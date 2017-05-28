@@ -14,10 +14,10 @@ namespace AppLayer
         private IRepository<VEvent> EventStorage { get; }
         public event Action<IResponse> OnRemind;
         private TimeSpan dTime;
-        public Reminder(int timeInterval)
+        public Reminder(int timeInterval, IRepository<VEvent> eventStorage)
         {
             dTime = TimeSpan.FromMilliseconds(timeInterval);
-            EventStorage = StorageFactory.GetRepository<VEvent>();
+            EventStorage = eventStorage;
             this.Timer = new Timer(state => Remind());
             Timer.Change(0, timeInterval);
         }

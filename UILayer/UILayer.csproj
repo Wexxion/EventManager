@@ -54,6 +54,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BotData.cs" />
     <Compile Include="IMessengerBot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TelegramMessengerBot.cs" />

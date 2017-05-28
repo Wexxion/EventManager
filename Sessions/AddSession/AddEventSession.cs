@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RepoLayer;
 using RepoLayer.Session;
 using TaskManager.AppLayer;
 using TaskManager.AppLayer.Sessions.AddSession.Commands;
@@ -16,10 +14,14 @@ namespace AddSession
     public class AddEventSession : BaseBotSession
     {
         private VEvent Event { get; set; }
+        private IRepository<VEvent> EventStorage { get; set; }
         private SessionCommand ExpectedCommand { get; set; }
         private Dictionary<string, SessionCommand> Commands { get; set; }
-        public AddEventSession() : base("Add event")
-        { 
+
+        [ImportingConstructor]
+        public AddEventSession([Import("EventStorage")]IRepository<VEvent> eventStorage) : base("Add event")
+        {
+            EventStorage = eventStorage;
         }
 
         private void CommandConfiguration()
@@ -32,7 +34,7 @@ namespace AddSession
                 new FinishTimeCommand(Event),
                 new FirstReminderCommand(Event),
                 new SecondReminderCommand(Event),
-                new SaveCommand(Event),
+                new SaveCommand(Event,EventStorage),
                 new ExitCommand(Event)
             }.ToDictionary(x => x.Name, x => x);
         }

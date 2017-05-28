@@ -62,7 +62,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Session\BaseBotSession.cs" />
     <Compile Include="Session\SessionCommand.cs" />
-    <Compile Include="StorageFactory.cs" />
     <Compile Include="ValueType.cs" />
   </ItemGroup>
   <ItemGroup>

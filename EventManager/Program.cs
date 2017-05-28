@@ -21,9 +21,9 @@ namespace TaskManager
             {
                 DbName = "storage.db",
                 Token = "token",
+                PathToPluginsFile = "Plugins",
                 RemindTimeOut = 1000 * 10
             };
-            StorageFactory.dbName = config.DbName;
             NinjectConfig.Configure(config);
             var bot = NinjectConfig.GetKernel().Get<IMessengerBot>();
             bot.OnRequest += request =>
