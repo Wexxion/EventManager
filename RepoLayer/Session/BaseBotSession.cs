@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using TaskManager.RepoLayer;
-using TaskManager.RepoLayer.MessengerInterfaces;
+using RepoLayer.MessengerInterfaces;
 
 namespace RepoLayer.Session
 {

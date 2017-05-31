@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
+using AppLayer;
+using DomainLayer;
 using RepoLayer;
+using RepoLayer.MessengerInterfaces;
 using RepoLayer.Session;
-using TaskManager.AppLayer;
-using TaskManager.DomainLayer;
-using TaskManager.RepoLayer.MessengerInterfaces;
 
 namespace ListSession
 {

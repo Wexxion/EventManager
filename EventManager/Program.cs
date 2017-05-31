@@ -1,15 +1,9 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Text;
+using DomainLayer;
 using Ninject;
-using RepoLayer;
-using TaskManager.DomainLayer;
-using TaskManager.RepoLayer;
-using TaskManager.UILayer;
+using UILayer;
 
 namespace TaskManager
 {
@@ -21,7 +15,7 @@ namespace TaskManager
             {
                 DbName = "storage.db",
                 Token = "token",
-                PathToPluginsFile = "Plugins",
+                PathToPluginsFolder = "Plugins",
                 RemindTimeOut = 1000 * 10
             };
             NinjectConfig.Configure(config);
@@ -36,4 +30,6 @@ namespace TaskManager
             bot.Stop();
         }
     }
+
+    
 }

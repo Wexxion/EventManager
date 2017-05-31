@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using AppLayer;
-using TaskManager.AppLayer;
-using TaskManager.DomainLayer;
-using TaskManager.RepoLayer.MessengerInterfaces;
+using DomainLayer;
+using RepoLayer.MessengerInterfaces;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 
-namespace TaskManager.UILayer
+namespace UILayer
 {
     public class TelegramMessengerBot : IMessengerBot
     {
@@ -24,17 +22,16 @@ namespace TaskManager.UILayer
         public TelegramMessengerBot(TelegramBotClient bot, SessionHandler handler, Reminder reminder)
         {
             Reminder = reminder;
-            Reminder.OnRemind += BotOnRemind;
             Bot = bot;
             Handler = handler;
-            Bot.OnMessage += BotOnMessageReceived;
         }
 
         public void Start()
         {
             Bot.StartReceiving();
+            Bot.OnMessage += BotOnMessageReceived;
+            Reminder.OnRemind += BotOnRemind;
         }
-
         public void Stop()
         {
             Bot.StopReceiving();

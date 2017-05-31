@@ -1,10 +1,11 @@
 ﻿using System;
 using System.CodeDom;
 using System.Linq;
+using System.Text;
 using System.Threading;
+using DomainLayer;
 using RepoLayer;
-using TaskManager.DomainLayer;
-using TaskManager.RepoLayer.MessengerInterfaces;
+using RepoLayer.MessengerInterfaces;
 
 namespace AppLayer
 {
@@ -37,14 +38,10 @@ namespace AppLayer
             foreach (var @event in events)
             {
                 var person = @event.Creator;
-
-                var result = $"You asked me to remind you about this event: \r\n" +
-                             $"Event name: {@event.Name}\r\n" +
-                             $"Event description: {@event.Description}\r\n" +
-                             $"Start time: {@event.Start}\r\n" +
-                             $"End time: {@event.End}\r\n";
-
-                var response = new RemindResponse(result, person.TelegramId);
+                var result = new StringBuilder();
+                result.Append($"You asked me to remind you about this event: \r\n");
+                result.Append(@event);
+                var response = new RemindResponse(result.ToString(), person.TelegramId);
                 OnRemind?.Invoke(response);
             }
 

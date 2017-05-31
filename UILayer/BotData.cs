@@ -1,6 +1,6 @@
 ﻿using Telegram.Bot.Types.ReplyMarkups;
 
-namespace TaskManager.UILayer
+namespace UILayer
 {
     public class BotData
     {

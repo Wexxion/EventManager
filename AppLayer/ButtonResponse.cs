@@ -1,7 +1,7 @@
 ﻿using System;
-using TaskManager.RepoLayer.MessengerInterfaces;
+using RepoLayer.MessengerInterfaces;
 
-namespace TaskManager.AppLayer
+namespace AppLayer
 {
     public class ButtonResponse : IResponse
     {
@@ -17,6 +17,6 @@ namespace TaskManager.AppLayer
         }
         public string Text { get; }
         public string[] ButtonNames { get; }
-        public ResponseStatus Status { get; }
+        public ResponseStatus Status { get; set; }
     }
 }

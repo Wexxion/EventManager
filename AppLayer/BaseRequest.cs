@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using TaskManager.DomainLayer;
-using TaskManager.RepoLayer;
-using TaskManager.RepoLayer.MessengerInterfaces;
+﻿using DomainLayer;
+using RepoLayer;
+using RepoLayer.MessengerInterfaces;
 
-namespace TaskManager.AppLayer
+namespace AppLayer
 {
     public class BaseRequest : IRequest
     {

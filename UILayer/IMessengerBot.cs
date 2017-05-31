@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Threading.Tasks;
-using TaskManager.RepoLayer.MessengerInterfaces;
+using RepoLayer.MessengerInterfaces;
 
-namespace TaskManager.UILayer
+namespace UILayer
 {
     public interface IMessengerBot
     {

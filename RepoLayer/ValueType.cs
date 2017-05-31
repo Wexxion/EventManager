@@ -1,4 +1,4 @@
-﻿namespace TaskManager.RepoLayer
+﻿namespace RepoLayer
 {
     public class ValueType
     {

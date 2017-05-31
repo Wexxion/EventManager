@@ -2,9 +2,9 @@
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.IO;
+using DomainLayer;
 using RepoLayer;
 using RepoLayer.Session;
-using TaskManager.DomainLayer;
 
 namespace TaskManager.App_Start
 {

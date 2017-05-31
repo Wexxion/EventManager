@@ -1,6 +1,6 @@
-﻿using TaskManager.RepoLayer;
+﻿using RepoLayer;
 
-namespace TaskManager.DomainLayer
+namespace DomainLayer
 {
     public class Person : Entity
     {

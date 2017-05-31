@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using RepoLayer.MessengerInterfaces;
 using RepoLayer.Session;
-using TaskManager.RepoLayer.MessengerInterfaces;
 
-namespace TaskManager.AppLayer
+namespace AppLayer
 {
     public class SessionHandler
     {
@@ -14,7 +14,6 @@ namespace TaskManager.AppLayer
         {
             EventCommands = sessions
                 .ToDictionary(x => x.Name,x => x);
-            Console.WriteLine(EventCommands.Count);
         }
 
         public IResponse ProcessMessage(IRequest message)
@@ -27,7 +26,7 @@ namespace TaskManager.AppLayer
                 else
                     return new ButtonResponse(
                         "No such command implemented!",
-                        EventCommands.Keys.ToArray(), ResponseStatus.Close);
+                        EventCommands.Keys.ToArray(), ResponseStatus.Abbort);
             }
             try
             {
@@ -35,13 +34,13 @@ namespace TaskManager.AppLayer
                 if (response.Status == ResponseStatus.Expect)
                     return response;
                 ActiveSession = null;
-                return new ButtonResponse(response.Text, EventCommands.Keys.ToArray(), ResponseStatus.Close);
+                return new ButtonResponse(response.Text, EventCommands.Keys.ToArray(), ResponseStatus.Abbort);
             }
             catch (ArgumentException)
             {
                 return new ButtonResponse(
                     "Incorrect command arguments!",
-                    EventCommands.Keys.ToArray(), ResponseStatus.Close);
+                    EventCommands.Keys.ToArray(), ResponseStatus.Abbort);
             }
         }
     }

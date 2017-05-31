@@ -8,7 +8,7 @@ namespace TaskManager
         public string Token { get; set; }
         public string DbName { get; set; }
         public int RemindTimeOut { get; set; }
-        public string PathToPluginsFile { get; set; }
+        public string PathToPluginsFolder { get; set; }
         public static Configuration Load(string confPath)
         {
             var ser = new XmlSerializer(typeof(Configuration));

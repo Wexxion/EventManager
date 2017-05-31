@@ -1,7 +1,4 @@
-﻿using System.Globalization;
-using System.Text;
-
-namespace TaskManager.AppLayer
+﻿namespace AppLayer
 {
     //http://apps.timwhitlock.info/emoji/tables/unicode
     public static class Emoji

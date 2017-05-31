@@ -4,11 +4,11 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AppLayer;
+using DomainLayer;
 using RepoLayer;
+using RepoLayer.MessengerInterfaces;
 using RepoLayer.Session;
-using TaskManager.AppLayer;
-using TaskManager.DomainLayer;
-using TaskManager.RepoLayer.MessengerInterfaces;
 
 namespace DeleteEventsSession
 {

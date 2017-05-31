@@ -4,11 +4,11 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AppLayer;
+using DomainLayer;
 using RepoLayer;
+using RepoLayer.MessengerInterfaces;
 using RepoLayer.Session;
-using TaskManager.AppLayer;
-using TaskManager.DomainLayer;
-using TaskManager.RepoLayer.MessengerInterfaces;
 
 namespace EventListSession
 {
@@ -20,24 +20,6 @@ namespace EventListSession
         public EventListSession([Import("EventStorage")]IRepository<VEvent> eventStorage) : base("My events")
         {
             EventStorage = eventStorage;
-        }
-
-        private string EventToString(VEvent e)
-        {
-            var builder = new StringBuilder();
-            if (e.Name != null)
-                builder.Append($"Name = {e.Name}\r\n");
-            if (e.Description != null)
-                builder.Append($"Description = {e.Description}\r\n");
-            if (e.Start != default(DateTime))
-                builder.Append($"Start = {e.Start}\r\n");
-            if (e.End != default(DateTime))
-                builder.Append($"End = {e.End}\r\n");
-            if (e.FirstReminder != default(TimeSpan))
-                builder.Append($"First Reminder = {e.FirstReminder}\r\n");
-            if (e.SecondReminder != default(TimeSpan))
-                builder.Append($"Second Reminder = {e.SecondReminder}\r\n");
-            return  builder.ToString();
         }
         public override IResponse Execute(IRequest message)
         {
@@ -54,7 +36,7 @@ namespace EventListSession
                 .FirstOrDefault(x => x.Id == id);
                 if (e == null)
                     return new TextResponse($"event with id {id} not found", ResponseStatus.Expect);
-                return new TextResponse(EventToString(e),ResponseStatus.Expect);
+                return new TextResponse(e.ToString(),ResponseStatus.Expect);
             }
             var events = EventStorage
                 .GetAll(x => x.Creator.TelegramId == author.TelegramId).ToArray();

@@ -1,7 +1,7 @@
 ﻿using System;
-using TaskManager.RepoLayer.MessengerInterfaces;
+using RepoLayer.MessengerInterfaces;
 
-namespace TaskManager.AppLayer
+namespace AppLayer
 {
     public class TextResponse : IResponse
     {
@@ -14,6 +14,6 @@ namespace TaskManager.AppLayer
             Text = responseText;
             Status = status;
         }
-        public ResponseStatus Status { get; }
+        public ResponseStatus Status { get; set; }
     }
 }
