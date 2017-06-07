@@ -11,7 +11,7 @@ namespace AppLayer
         {
             RemindId = id;
             Text = text;
-            Status = ResponseStatus.Abbort;
+            Status = ResponseStatus.Abort;
         }
     }
 }

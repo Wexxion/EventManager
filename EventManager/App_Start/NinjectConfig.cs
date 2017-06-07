@@ -1,13 +1,12 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using AppLayer;
+﻿using AppLayer;
 using DomainLayer;
 using LiteDB;
 using Ninject;
 using RepoLayer;
 using RepoLayer.Session;
-using TaskManager.App_Start;
 using Telegram.Bot;
 using UILayer;
+using UILayer.Telegram;
 
 namespace TaskManager
 {

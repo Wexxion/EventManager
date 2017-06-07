@@ -6,14 +6,14 @@ using DomainLayer;
 using RepoLayer;
 using RepoLayer.Session;
 
-namespace TaskManager.App_Start
+namespace TaskManager
 {
     class CommandLoader
     {
         [ImportMany(typeof(BaseBotSession))]
         private IEnumerable<BaseBotSession> Commands { get; set; }
 
-        public CommandLoader(string pathToPlugins, IRepository<VEvent> eventStorage, IRepository<Person> personStorage  )
+        public CommandLoader(string pathToPlugins, IRepository<VEvent> eventStorage, IRepository<Person> personStorage)
         {
             var catalog = new AggregateCatalog();
             var path = Path.Combine(Directory.GetCurrentDirectory(), pathToPlugins);

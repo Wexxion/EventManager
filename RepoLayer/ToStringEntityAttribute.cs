@@ -10,8 +10,6 @@ namespace RepoLayer
             Name = name;
         }
 
-        public ToStringEntityAttribute()
-        {
-        }
+        public ToStringEntityAttribute() { }
     }
 }

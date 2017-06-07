@@ -1,5 +1,4 @@
 ﻿using System;
-using System.CodeDom;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -14,12 +13,12 @@ namespace AppLayer
         private Timer Timer { get;}
         private IRepository<VEvent> EventStorage { get; }
         public event Action<IResponse> OnRemind;
-        private TimeSpan dTime;
+        private readonly TimeSpan dTime;
         public Reminder(int timeInterval, IRepository<VEvent> eventStorage)
         {
             dTime = TimeSpan.FromMilliseconds(timeInterval);
             EventStorage = eventStorage;
-            this.Timer = new Timer(state => Remind());
+            Timer = new Timer(state => Remind());
             Timer.Change(0, timeInterval);
         }
 

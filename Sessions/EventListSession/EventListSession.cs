@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using AppLayer;
 using DomainLayer;
 using RepoLayer;
@@ -15,7 +12,7 @@ namespace EventListSession
     [Export(typeof(BaseBotSession))]
     public class EventListSession : BaseBotSession
     {
-        private IRepository<VEvent> EventStorage { get; set; }
+        private IRepository<VEvent> EventStorage { get; }
         [ImportingConstructor]
         public EventListSession([Import("EventStorage")]IRepository<VEvent> eventStorage) : base("My events")
         {
@@ -34,9 +31,8 @@ namespace EventListSession
                 var e = EventStorage
                 .GetAll(x => x.Creator.TelegramId == author.TelegramId)
                 .FirstOrDefault(x => x.Id == id);
-                if (e == null)
-                    return new TextResponse($"event with id {id} not found", ResponseStatus.Expect);
-                return new TextResponse(e.ToString(),ResponseStatus.Expect);
+                return e == null ? new TextResponse($"event with id {id} not found", ResponseStatus.Expect) : 
+                    new TextResponse(e.ToString(),ResponseStatus.Expect);
             }
             var events = EventStorage
                 .GetAll(x => x.Creator.TelegramId == author.TelegramId).ToArray();

@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
-using System.Xml.Serialization;
+using AddSession.CustomCommands;
 using AppLayer;
 using DomainLayer;
 using RepoLayer;
 using RepoLayer.MessengerInterfaces;
 using RepoLayer.Session;
-using TaskManager.AppLayer;
-using TaskManager.AppLayer.Sessions.AddSession.Commands;
 
 namespace AddSession
 {
@@ -17,7 +14,7 @@ namespace AddSession
     public class AddEventSession : BaseBotSession
     {
         private VEvent Event { get; set; }
-        private IRepository<VEvent> EventStorage { get; set; }
+        private IRepository<VEvent> EventStorage { get; }
         private SessionCommand ExpectedCommand { get; set; }
         private Dictionary<string, SessionCommand> Commands { get; set; }
 
@@ -48,14 +45,14 @@ namespace AddSession
                 new BaseCommand("Exit",null, r =>
                 {
                     Event = null;
-                    return new TextResponse("Exit",ResponseStatus.Abbort);
+                    return new TextResponse("Exit",ResponseStatus.Abort);
                 },false),
                 new BaseCommand("Save",null, r =>
                 {
                     if(Event.Name == null || Name.Length == 0)
                         return new TextResponse(Emoji.CrossMark+"Add event name", ResponseStatus.Exception);
                     EventStorage.Add(Event);
-                    return new TextResponse(Emoji.CheckMark, ResponseStatus.Abbort);
+                    return new TextResponse(Emoji.CheckMark, ResponseStatus.Abort);
                 },false)
             }.ToDictionary(x => x.Name, x => x);
         }

@@ -6,9 +6,7 @@ namespace DomainLayer
 {
     public class VEvent : Entity
     {
-        public VEvent()
-        {
-        }
+        public VEvent() {}
 
         public Person Creator { get; private set; }
         [ToStringEntity("Event Name")]
@@ -22,7 +20,7 @@ namespace DomainLayer
         public Location Location { get; private set; }
         public TimeSpan FirstReminder { get; private set; }
         public TimeSpan SecondReminder { get; private set; }
-        public HashSet<Person> Participants { get; private set; }
+        public HashSet<Person> Participants { get; }
         public TimeSpan Length
         {
             get

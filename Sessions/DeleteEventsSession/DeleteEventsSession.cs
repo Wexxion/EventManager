@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.Composition;
 using AppLayer;
 using DomainLayer;
 using RepoLayer;
@@ -15,7 +10,7 @@ namespace DeleteEventsSession
     [Export(typeof(BaseBotSession))]
     public class DeleteEventsSession : BaseBotSession
     {
-        private IRepository<VEvent> EventStorage { get; set; }
+        private IRepository<VEvent> EventStorage { get; }
         [ImportingConstructor]
         public DeleteEventsSession([Import("EventStorage")]IRepository<VEvent> eventStorage) : base("Delete all events")
         {

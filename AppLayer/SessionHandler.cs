@@ -12,8 +12,7 @@ namespace AppLayer
         private BaseBotSession ActiveSession { get; set; }
         public SessionHandler( IEnumerable<BaseBotSession> sessions )
         {
-            EventCommands = sessions
-                .ToDictionary(x => x.Name,x => x);
+            EventCommands = sessions.ToDictionary(x => x.Name, x => x);
         }
 
         public IResponse ProcessMessage(IRequest message)
@@ -26,7 +25,7 @@ namespace AppLayer
                 else
                     return new ButtonResponse(
                         "No such command implemented!",
-                        EventCommands.Keys.ToArray(), ResponseStatus.Abbort);
+                        EventCommands.Keys.ToArray(), ResponseStatus.Abort);
             }
             try
             {
@@ -34,13 +33,13 @@ namespace AppLayer
                 if (response.Status == ResponseStatus.Expect)
                     return response;
                 ActiveSession = null;
-                return new ButtonResponse(response.Text, EventCommands.Keys.ToArray(), ResponseStatus.Abbort);
+                return new ButtonResponse(response.Text, EventCommands.Keys.ToArray(), ResponseStatus.Abort);
             }
             catch (ArgumentException)
             {
                 return new ButtonResponse(
                     "Incorrect command arguments!",
-                    EventCommands.Keys.ToArray(), ResponseStatus.Abbort);
+                    EventCommands.Keys.ToArray(), ResponseStatus.Abort);
             }
         }
     }

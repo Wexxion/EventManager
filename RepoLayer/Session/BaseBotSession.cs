@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using RepoLayer.MessengerInterfaces;
+﻿using RepoLayer.MessengerInterfaces;
 
 namespace RepoLayer.Session
 {
@@ -9,7 +7,7 @@ namespace RepoLayer.Session
         public string Name { get; }
         protected BaseBotSession(string name)
         {
-            this.Name = name;
+            Name = name;
         }
         public abstract IResponse Execute(IRequest message);
     }

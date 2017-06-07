@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using LiteDB;
 
 namespace RepoLayer
@@ -11,7 +8,7 @@ namespace RepoLayer
     public class NoSqlDb<TEntity> : IRepository<TEntity>
         where TEntity : Entity
     {
-        private LiteCollection<TEntity> collection;
+        private readonly LiteCollection<TEntity> collection;
 
         public NoSqlDb(LiteDatabase db)
         {

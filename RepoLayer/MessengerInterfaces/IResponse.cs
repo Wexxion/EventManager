@@ -8,7 +8,7 @@
 
     public enum ResponseStatus
     {
-        Abbort,
+        Abort,
         Close,
         Expect,
         Exception

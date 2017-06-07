@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.Composition;
 using AppLayer;
 using DomainLayer;
 using RepoLayer;
@@ -15,7 +10,7 @@ namespace LoginSession
     [Export(typeof(BaseBotSession))]
     public class LoginSession : BaseBotSession
     {
-        private IRepository<Person> PersonsStorage { get; set; }
+        private IRepository<Person> PersonsStorage { get; }
         [ImportingConstructor]
         public LoginSession([Import("PersonStorage")]IRepository<Person> personsStorage) : base("Login")
         {
@@ -27,9 +22,9 @@ namespace LoginSession
             var author = (Person)message.Author;
             var tAuthor = PersonsStorage.Get(x => x.TelegramId == author.TelegramId);
             if (tAuthor != null)
-                return new TextResponse("I already know you", ResponseStatus.Close);
+                return new TextResponse("You've already logged in", ResponseStatus.Close);
             PersonsStorage.Add(author);
-            return new TextResponse("I remember you", ResponseStatus.Close);
+            return new TextResponse("You've successfully logged in", ResponseStatus.Close);
         }
     }
 }

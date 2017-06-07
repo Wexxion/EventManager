@@ -12,7 +12,7 @@ namespace ListSession
     [Export(typeof(BaseBotSession))]
     public class ListSession : BaseBotSession
     {
-        private IRepository<Person> PersonsStorage { get; set; }
+        private IRepository<Person> PersonsStorage { get; }
         [ImportingConstructor]
         public ListSession([Import("PersonStorage")]IRepository<Person> personStorage) : base("All users")
         {

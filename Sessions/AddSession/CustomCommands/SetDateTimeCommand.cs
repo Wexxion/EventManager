@@ -3,7 +3,7 @@ using AppLayer;
 using RepoLayer.MessengerInterfaces;
 using RepoLayer.Session;
 
-namespace TaskManager.AppLayer.Sessions.AddSession.Commands
+namespace AddSession.CustomCommands
 {
     public class SetDateTimeCommand : SessionCommand
     {
