@@ -8,6 +8,9 @@ namespace DomainLayer
         public string FirstName { get;}
         public string LastName { get;}
         public string UserName { get;}
+
+        public Person() {}
+
         public Person(long telegramId, string firstName, string lastName, string username)
         {
             TelegramId = telegramId;

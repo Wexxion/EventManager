@@ -7,3 +7,9 @@ E:\Projects\OOP3\EventManager\EventManager\bin\Debug\RepoLayer.dll.config
 E:\Projects\OOP3\EventManager\EventManager\bin\Debug\RepoLayer.dll
 E:\Projects\OOP3\EventManager\EventManager\bin\Debug\RepoLayer.pdb
 E:\Projects\OOP3\EventManager\RepoLayer\obj\Debug\RepoLayer.csprojResolveAssemblyReference.cache
+C:\Users\Wexxion\Desktop\EventManager\EventManager\bin\Debug\RepoLayer.dll.config
+C:\Users\Wexxion\Desktop\EventManager\EventManager\bin\Debug\RepoLayer.dll
+C:\Users\Wexxion\Desktop\EventManager\EventManager\bin\Debug\RepoLayer.pdb
+C:\Users\Wexxion\Desktop\EventManager\RepoLayer\obj\Debug\RepoLayer.csprojResolveAssemblyReference.cache
+C:\Users\Wexxion\Desktop\EventManager\RepoLayer\obj\Debug\RepoLayer.dll
+C:\Users\Wexxion\Desktop\EventManager\RepoLayer\obj\Debug\RepoLayer.pdb

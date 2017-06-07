@@ -12,7 +12,7 @@ namespace TaskManager
             var config = new Configuration
             {
                 DbName = "storage.db",
-                Token = "token",
+                Token = "Token",
                 PathToPluginsFolder = "Plugins",
                 RemindTimeOut = 1000 * 10
             };

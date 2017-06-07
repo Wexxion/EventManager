@@ -19,3 +19,9 @@ E:\Projects\OOP3\EventManager\UILayer\obj\Debug\UILayer.pdb
 E:\Projects\OOP3\EventManager\EventManager\bin\Debug\UILayer.dll.config
 E:\Projects\OOP3\EventManager\EventManager\bin\Debug\UILayer.dll
 E:\Projects\OOP3\EventManager\EventManager\bin\Debug\UILayer.pdb
+C:\Users\Wexxion\Desktop\EventManager\EventManager\bin\Debug\UILayer.dll.config
+C:\Users\Wexxion\Desktop\EventManager\EventManager\bin\Debug\UILayer.dll
+C:\Users\Wexxion\Desktop\EventManager\EventManager\bin\Debug\UILayer.pdb
+C:\Users\Wexxion\Desktop\EventManager\UILayer\obj\Debug\UILayer.csprojResolveAssemblyReference.cache
+C:\Users\Wexxion\Desktop\EventManager\UILayer\obj\Debug\UILayer.dll
+C:\Users\Wexxion\Desktop\EventManager\UILayer\obj\Debug\UILayer.pdb

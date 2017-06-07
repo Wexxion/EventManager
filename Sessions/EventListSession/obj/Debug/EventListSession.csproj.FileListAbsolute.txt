@@ -3,3 +3,8 @@ E:\Projects\OOP3\EventManager\EventManager\bin\Debug\Plugins\EventListSession.pd
 E:\Projects\OOP3\EventManager\Sessions\EventListSession\obj\Debug\EventListSession.csprojResolveAssemblyReference.cache
 E:\Projects\OOP3\EventManager\Sessions\EventListSession\obj\Debug\EventListSession.dll
 E:\Projects\OOP3\EventManager\Sessions\EventListSession\obj\Debug\EventListSession.pdb
+C:\Users\Wexxion\Desktop\EventManager\EventManager\bin\Debug\Plugins\EventListSession.dll
+C:\Users\Wexxion\Desktop\EventManager\EventManager\bin\Debug\Plugins\EventListSession.pdb
+C:\Users\Wexxion\Desktop\EventManager\Sessions\EventListSession\obj\Debug\EventListSession.csprojResolveAssemblyReference.cache
+C:\Users\Wexxion\Desktop\EventManager\Sessions\EventListSession\obj\Debug\EventListSession.dll
+C:\Users\Wexxion\Desktop\EventManager\Sessions\EventListSession\obj\Debug\EventListSession.pdb
