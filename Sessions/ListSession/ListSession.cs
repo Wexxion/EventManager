@@ -12,7 +12,7 @@ namespace ListSession
     [Export(typeof(BaseBotSession))]
     public class ListSession : BaseBotSession
     {
-        private IRepository<Person> PersonsStorage { get; }
+        private IRepository<Person> PersonsStorage { get; set; }
         [ImportingConstructor]
         public ListSession([Import("PersonStorage")]IRepository<Person> personStorage) : base("All users")
         {
@@ -27,11 +27,8 @@ namespace ListSession
                 .ToArray();
             if (persons.Length == 0)
                 return new TextResponse("no authentificate users",ResponseStatus.Close);
-            foreach (var person in persons)
-            {
-                allPersons.Append(person.TelegramId);
-                allPersons.Append("\r\n");
-            }
+            for (var i = 0; i < persons.Length; i++)
+                allPersons.Append($"{i + 1}) {persons[i].UserName}\n\r");
             return new TextResponse(allPersons.ToString(), ResponseStatus.Close);
         }
     }

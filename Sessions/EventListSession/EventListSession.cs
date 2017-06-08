@@ -12,7 +12,7 @@ namespace EventListSession
     [Export(typeof(BaseBotSession))]
     public class EventListSession : BaseBotSession
     {
-        private IRepository<VEvent> EventStorage { get; }
+        private IRepository<VEvent> EventStorage { get; set; }
         [ImportingConstructor]
         public EventListSession([Import("EventStorage")]IRepository<VEvent> eventStorage) : base("My events")
         {

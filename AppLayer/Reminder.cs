@@ -13,7 +13,7 @@ namespace AppLayer
         private Timer Timer { get;}
         private IRepository<VEvent> EventStorage { get; }
         public event Action<IResponse> OnRemind;
-        private readonly TimeSpan dTime;
+        private TimeSpan dTime;
         public Reminder(int timeInterval, IRepository<VEvent> eventStorage)
         {
             dTime = TimeSpan.FromMilliseconds(timeInterval);

@@ -10,7 +10,7 @@ namespace LoginSession
     [Export(typeof(BaseBotSession))]
     public class LoginSession : BaseBotSession
     {
-        private IRepository<Person> PersonsStorage { get; }
+        private IRepository<Person> PersonsStorage { get; set; }
         [ImportingConstructor]
         public LoginSession([Import("PersonStorage")]IRepository<Person> personsStorage) : base("Login")
         {

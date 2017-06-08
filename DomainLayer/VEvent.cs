@@ -20,7 +20,7 @@ namespace DomainLayer
         public Location Location { get; private set; }
         public TimeSpan FirstReminder { get; private set; }
         public TimeSpan SecondReminder { get; private set; }
-        public HashSet<Person> Participants { get; }
+        public HashSet<Person> Participants { get; private set; }
         public TimeSpan Length
         {
             get

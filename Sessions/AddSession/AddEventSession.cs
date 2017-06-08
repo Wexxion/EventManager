@@ -14,7 +14,7 @@ namespace AddSession
     public class AddEventSession : BaseBotSession
     {
         private VEvent Event { get; set; }
-        private IRepository<VEvent> EventStorage { get; }
+        private IRepository<VEvent> EventStorage { get; set; }
         private SessionCommand ExpectedCommand { get; set; }
         private Dictionary<string, SessionCommand> Commands { get; set; }
 

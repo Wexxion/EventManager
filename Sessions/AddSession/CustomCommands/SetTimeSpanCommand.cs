@@ -9,14 +9,14 @@ namespace AddSession.CustomCommands
 {
     public class SetTimeSpanCommand : SessionCommand
     {
-        private static readonly Dictionary<string, TimeSpan> SupportDate = new Dictionary<string, TimeSpan>()
+        private static Dictionary<string, TimeSpan> SupportDate = new Dictionary<string, TimeSpan>()
         {
             {"half an hour", new TimeSpan(0, 0, 30, 0)},
             {"1 hour", new TimeSpan(0, 1, 0, 0)},
             {"2 hour", new TimeSpan(0, 2, 0, 0)},
 
         };
-        private Action<TimeSpan> TimeAction { get; }
+        private Action<TimeSpan> TimeAction { get; set; }
         public SetTimeSpanCommand(string name,Action<TimeSpan> timeAction)
             : base(
                 name,

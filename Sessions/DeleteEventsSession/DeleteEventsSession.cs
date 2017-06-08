@@ -10,7 +10,7 @@ namespace DeleteEventsSession
     [Export(typeof(BaseBotSession))]
     public class DeleteEventsSession : BaseBotSession
     {
-        private IRepository<VEvent> EventStorage { get; }
+        private IRepository<VEvent> EventStorage { get; set; }
         [ImportingConstructor]
         public DeleteEventsSession([Import("EventStorage")]IRepository<VEvent> eventStorage) : base("Delete all events")
         {
