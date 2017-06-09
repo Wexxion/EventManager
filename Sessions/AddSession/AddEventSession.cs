@@ -102,7 +102,7 @@ namespace AddSession
                 return ResponseAnalizer(response, ExpectedCommand);
             }
             if (!Commands.ContainsKey(text))
-                return new ButtonResponse($"Unsupported command", GetCommands(), ResponseStatus.Expect);
+                return new ButtonResponse("Unsupported command", GetCommands(), ResponseStatus.Expect);
             var command = Commands[text];
             if (command.NeedAnswer)
                 return ResponseAnalizer(command.HelpResponse, command);

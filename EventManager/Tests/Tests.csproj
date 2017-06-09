@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\MSTest.TestAdapter.1.1.18\build\net45\MSTest.TestAdapter.props" Condition="Exists('..\packages\MSTest.TestAdapter.1.1.18\build\net45\MSTest.TestAdapter.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -38,30 +37,61 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\MSTest.TestFramework.1.1.18\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\MSTest.TestFramework.1.1.18\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
-    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Temp.cs" />
+    <Compile Include="MockEventStorage.cs" />
+    <Compile Include="MockPersonsStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\AppLayer\AppLayer.csproj">
+      <Project>{a5107fc1-8671-4674-8df9-7c894b8792cd}</Project>
+      <Name>AppLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DomainLayer\DomainLayer.csproj">
+      <Project>{7acc97f8-7b28-4cb4-a823-6c6f97483a9b}</Project>
+      <Name>DomainLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\RepoLayer\RepoLayer.csproj">
+      <Project>{36AA6ED5-2EAC-490C-A2E3-6464B1F4167F}</Project>
+      <Name>RepoLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Sessions\AddSession\AddSession.csproj">
+      <Project>{d335ddbf-b59f-40bf-a94c-041db88a8ce0}</Project>
+      <Name>AddSession</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Sessions\DeleteEventsSession\DeleteEventsSession.csproj">
+      <Project>{11b8774e-c90c-45f6-bc1f-0b009f801c65}</Project>
+      <Name>DeleteEventsSession</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Sessions\EventListSession\EventListSession.csproj">
+      <Project>{52e29623-36c9-41d3-b1f7-cf9edcc1ee48}</Project>
+      <Name>EventListSession</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Sessions\ListSession\ListSession.csproj">
+      <Project>{d7b16a42-48b8-4a6d-add0-4c564616efb4}</Project>
+      <Name>ListSession</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Sessions\LoginSession\LoginSession.csproj">
+      <Project>{809f40b4-4432-46dc-a91c-919e5fbc4db8}</Project>
+      <Name>LoginSession</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\UILayer\UILayer.csproj">
+      <Project>{b0e3c81f-8859-4fcf-9d9c-58f8dd07358f}</Project>
+      <Name>UILayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EventManager.csproj">
+      <Project>{5fe728fa-5abc-4231-a085-b3fdeec2d85d}</Project>
+      <Name>EventManager</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\MSTest.TestAdapter.1.1.18\build\net45\MSTest.TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSTest.TestAdapter.1.1.18\build\net45\MSTest.TestAdapter.props'))" />
-    <Error Condition="!Exists('..\packages\MSTest.TestAdapter.1.1.18\build\net45\MSTest.TestAdapter.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSTest.TestAdapter.1.1.18\build\net45\MSTest.TestAdapter.targets'))" />
-  </Target>
-  <Import Project="..\packages\MSTest.TestAdapter.1.1.18\build\net45\MSTest.TestAdapter.targets" Condition="Exists('..\packages\MSTest.TestAdapter.1.1.18\build\net45\MSTest.TestAdapter.targets')" />
 </Project>

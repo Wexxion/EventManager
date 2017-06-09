@@ -8,7 +8,7 @@ using RepoLayer.Session;
 
 namespace TaskManager
 {
-    class CommandLoader
+    public class CommandLoader
     {
         [ImportMany(typeof(BaseBotSession))]
         private IEnumerable<BaseBotSession> Commands { get; set; }

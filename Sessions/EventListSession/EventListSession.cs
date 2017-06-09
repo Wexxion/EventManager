@@ -37,7 +37,7 @@ namespace EventListSession
             var events = EventStorage
                 .GetAll(x => x.Creator.TelegramId == author.TelegramId).ToArray();
             if (events.Length == 0)
-                return new TextResponse("you haven't events",ResponseStatus.Close);
+                return new TextResponse("You don't have any events",ResponseStatus.Close);
             var resp = new StringBuilder();
             var i = 1;
             foreach (var @event in events)

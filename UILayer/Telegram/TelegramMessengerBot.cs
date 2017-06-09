@@ -25,6 +25,7 @@ namespace UILayer.Telegram
             Bot.StartReceiving();
             Bot.OnMessage += BotOnMessageReceived;
             Reminder.OnRemind += BotOnRemind;
+            Reminder.Start();
         }
         public void Stop()
         {
