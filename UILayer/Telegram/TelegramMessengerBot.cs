@@ -1,23 +1,28 @@
 ﻿using System;
 using AppLayer;
+using DomainLayer;
 using RepoLayer.MessengerInterfaces;
 using Telegram.Bot;
 using Telegram.Bot.Args;
+using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 
 namespace UILayer.Telegram
 {
     public class TelegramMessengerBot : IMessengerBot
     {
         private TelegramBotClient Bot { get;}
-        private SessionHandler Handler { get; }
+        private SessionHandler SessionHandler { get; }
+        private TelegramResponseHandler ResponseHandler { get; }
         private Reminder Reminder { get; }
         public event Action<IRequest> OnRequest;
         public event Action<Exception> OnError;
-        public TelegramMessengerBot(TelegramBotClient bot, SessionHandler handler, Reminder reminder)
+        public TelegramMessengerBot(TelegramBotClient bot, SessionHandler sessionHandler, Reminder reminder, TelegramResponseHandler responseHandler)
         {
             Reminder = reminder;
             Bot = bot;
-            Handler = handler;
+            SessionHandler = sessionHandler;
+            ResponseHandler = responseHandler;
         }
 
         public void Start()
@@ -45,9 +50,9 @@ namespace UILayer.Telegram
             var message = messageEventArgs.Message;
             try
             {
-                var request = TelegramResponseHandler.AnalyzeIncomingMessage(message);
+                var request = AnalyzeIncomingMessage(message);
                 OnRequest?.Invoke(request);
-                var response = TelegramResponseHandler.ResponseAnalyzer(Handler.ProcessMessage(request));
+                var response = ResponseHandler.ResponseAnalyzer(SessionHandler.ProcessMessage(request));
                 await Bot.SendTextMessageAsync(message.Chat.Id, response.Text, replyMarkup: response.Markup);
             }
             catch (ArgumentException e)
@@ -59,6 +64,14 @@ namespace UILayer.Telegram
             {
                 OnError?.Invoke(e);
             }
+        }
+        public IRequest AnalyzeIncomingMessage(Message message)
+        {
+            if (message.Type != MessageType.TextMessage)
+                throw new ArgumentException($"{message.Type} is not supported yet =[");
+            var sender = message.Chat;
+            var author = new Person(sender.Id, sender.FirstName, sender.LastName, sender.Username);
+            return new BaseRequest(author, message.Text);
         }
     }
 }
