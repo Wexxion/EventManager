@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Data;
+using System.IO;
+using System.Xml.Serialization;
 using DomainLayer;
+using Newtonsoft.Json;
 using Ninject;
 using UILayer;
 
@@ -9,14 +13,7 @@ namespace TaskManager
     {
         public static void Main(string[] args)
         {
-            var config = new Configuration
-            {
-                DbName = "storage.db",
-                Token = "389115701:AAGnXQ8Zbdzu9j56B-kwipHfVOw8j2XePpI",
-                PathToPluginsFolder = "Plugins",
-                RemindTimeOut = 1000 * 10
-            };
-            NinjectConfig.Configure(config);
+            NinjectConfig.Configure(Configuration.Load("Configuration.xml"));
             var bot = NinjectConfig.GetKernel().Get<IMessengerBot>();
             bot.OnRequest += request =>
             {

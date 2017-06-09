@@ -10,9 +10,9 @@ using Telegram.Bot.Types.ReplyMarkups;
 
 namespace UILayer.Telegram
 {
-    class TelegramResponseHandler
+    public class TelegramResponseHandler
     {
-        public static BotData ResponseAnalyzer(IResponse response)
+        public  BotData ResponseAnalyzer(IResponse response)
         {
             if (response is ButtonResponse)
             {
@@ -26,7 +26,7 @@ namespace UILayer.Telegram
             }
             return new BotData(response.Text);
         }
-        public static ReplyKeyboardMarkup GetKeyboard(IEnumerable<string> commandNames)
+        public  ReplyKeyboardMarkup GetKeyboard(IEnumerable<string> commandNames)
         {
             var buttonsCount = 4;
             var buttons = commandNames.Select(x => new KeyboardButton(x)).ToArray();
@@ -36,15 +36,6 @@ namespace UILayer.Telegram
             for (var i = 0; i < rowCount; i++)
                 buttonRows.Add(buttons.Skip(buttonsCount * i).Take(buttonsCount).ToArray());
             return new ReplyKeyboardMarkup(buttonRows.ToArray(), true);
-        }
-
-        public static IRequest AnalyzeIncomingMessage(Message message)
-        {
-            if (message.Type != MessageType.TextMessage)
-                throw new ArgumentException($"{message.Type} is not supported yet =[");
-            var sender = message.Chat;
-            var author = new Person(sender.Id, sender.FirstName, sender.LastName, sender.Username);
-            return new BaseRequest(author, message.Text);
         }
     }
 }
