@@ -1,50 +1,56 @@
 ﻿using System;
-using System.CodeDom;
 using System.Linq;
+using System.Text;
 using System.Threading;
+using DomainLayer;
 using RepoLayer;
-using TaskManager.DomainLayer;
-using TaskManager.RepoLayer.MessengerInterfaces;
+using RepoLayer.MessengerInterfaces;
 
 namespace AppLayer
 {
     public class Reminder
     {
+        public event Action<IResponse> OnRemind;
         private Timer Timer { get;}
         private IRepository<VEvent> EventStorage { get; }
-        public event Action<IResponse> OnRemind;
+        private readonly int timeInterval;
         private TimeSpan dTime;
-        public Reminder(int timeInterval)
+        public Reminder(int timeInterval, IRepository<VEvent> eventStorage)
         {
+            this.timeInterval = timeInterval;
             dTime = TimeSpan.FromMilliseconds(timeInterval);
-            EventStorage = StorageFactory.GetRepository<VEvent>();
-            this.Timer = new Timer(state => Remind());
+            EventStorage = eventStorage;
+            Timer = new Timer(state => Remind(() => DateTime.Now));
+        }
+
+        public void Start()
+        {
             Timer.Change(0, timeInterval);
         }
 
-        public void Remind()
+        private VEvent[] GetEventsToRemind(Func<DateTime> getCurrentTime)
         {
-            var events = EventStorage
+            return EventStorage
                 .GetAll()
-                .Where(x => x.Start > DateTime.Now) //Отсеиваем уже завершенные
+                .Where(x => x.Start > getCurrentTime()) //Отсеиваем уже завершенные
                 .Where(x =>
                 {
-                    var preStartTime = x.Start - DateTime.Now;
+                    var preStartTime = x.Start - getCurrentTime();
                     if (preStartTime - x.FirstReminder <= dTime && preStartTime - x.FirstReminder >= TimeSpan.Zero)
                         return true;
                     return x.SecondReminder - preStartTime <= dTime && x.SecondReminder - preStartTime >= TimeSpan.Zero;
                 }).ToArray();
-            foreach (var @event in events)
+        }
+
+        public void Remind(Func<DateTime> getCurrentTime)
+        {
+            foreach (var @event in GetEventsToRemind(getCurrentTime))
             {
                 var person = @event.Creator;
-
-                var result = $"You asked me to remind you about this event: \r\n" +
-                             $"Event name: {@event.Name}\r\n" +
-                             $"Event description: {@event.Description}\r\n" +
-                             $"Start time: {@event.Start}\r\n" +
-                             $"End time: {@event.End}\r\n";
-
-                var response = new RemindResponse(result, person.TelegramId);
+                var result = new StringBuilder();
+                result.Append("You asked me to remind you about this event: \r\n");
+                result.Append(@event);
+                var response = new RemindResponse(result.ToString(), person.TelegramId);
                 OnRemind?.Invoke(response);
             }
 

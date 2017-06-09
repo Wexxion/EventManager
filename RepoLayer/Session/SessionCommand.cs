@@ -1,21 +1,16 @@
-﻿using TaskManager.RepoLayer;
-using TaskManager.RepoLayer.MessengerInterfaces;
+﻿using RepoLayer.MessengerInterfaces;
 
 namespace RepoLayer.Session
 {
     public abstract class SessionCommand
     {
         public string Name { get; }
-        public string Help { get; }
+        public IResponse HelpResponse { get; }
         public bool NeedAnswer { get; }
-        protected SessionCommand(string name, bool needAnswer = true) 
-            : this(name, $"send {name}", needAnswer)
-        {
-        }
-        protected SessionCommand(string name, string help, bool needAnswer = true)
+        protected SessionCommand(string name, IResponse helpResponse, bool needAnswer = true)
         {
             Name = name;
-            Help = help;
+            HelpResponse = helpResponse;
             NeedAnswer = needAnswer;
         }
         public abstract IResponse Apply(IRequest message);

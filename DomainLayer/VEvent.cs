@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using TaskManager.RepoLayer;
+using RepoLayer;
 
-
-namespace TaskManager.DomainLayer
+namespace DomainLayer
 {
     public class VEvent : Entity
     {
-        public VEvent()
-        {
-        }
+        public VEvent() {}
 
         public Person Creator { get; private set; }
+        [ToStringEntity("Event Name")]
         public string Name { get; private set; }
-        public DateTime Start { private set; get; }
-        public DateTime End { private set; get; }
+        [ToStringEntity]
         public string Description { private set; get; }
+        [ToStringEntity("Start time")]
+        public DateTime Start { private set; get; }
+        [ToStringEntity("End time")]
+        public DateTime End { private set; get; }
         public Location Location { get; private set; }
         public TimeSpan FirstReminder { get; private set; }
         public TimeSpan SecondReminder { get; private set; }

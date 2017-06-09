@@ -2,21 +2,25 @@
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.IO;
+using DomainLayer;
+using RepoLayer;
 using RepoLayer.Session;
 
-namespace TaskManager.App_Start
+namespace TaskManager
 {
-    class CommandLoader
+    public class CommandLoader
     {
         [ImportMany(typeof(BaseBotSession))]
         private IEnumerable<BaseBotSession> Commands { get; set; }
 
-        public CommandLoader(string pathToPlugins)
+        public CommandLoader(string pathToPlugins, IRepository<VEvent> eventStorage, IRepository<Person> personStorage)
         {
             var catalog = new AggregateCatalog();
             var path = Path.Combine(Directory.GetCurrentDirectory(), pathToPlugins);
             catalog.Catalogs.Add(new DirectoryCatalog(path));
             var container = new CompositionContainer(catalog);
+            container.ComposeExportedValue("PersonStorage", personStorage);
+            container.ComposeExportedValue("EventStorage", eventStorage);
             container.ComposeParts(this);
         }
 

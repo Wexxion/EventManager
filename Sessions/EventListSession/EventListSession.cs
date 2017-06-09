@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using AppLayer;
+using DomainLayer;
 using RepoLayer;
+using RepoLayer.MessengerInterfaces;
 using RepoLayer.Session;
-using TaskManager.AppLayer;
-using TaskManager.DomainLayer;
-using TaskManager.RepoLayer.MessengerInterfaces;
 
 namespace EventListSession
 {
@@ -16,28 +13,10 @@ namespace EventListSession
     public class EventListSession : BaseBotSession
     {
         private IRepository<VEvent> EventStorage { get; set; }
-
-        public EventListSession() : base("My events")
+        [ImportingConstructor]
+        public EventListSession([Import("EventStorage")]IRepository<VEvent> eventStorage) : base("My events")
         {
-            EventStorage = StorageFactory.GetRepository<VEvent>();
-        }
-
-        private string EventToString(VEvent e)
-        {
-            var builder = new StringBuilder();
-            if (e.Name != null)
-                builder.Append($"Name = {e.Name}\r\n");
-            if (e.Description != null)
-                builder.Append($"Description = {e.Description}\r\n");
-            if (e.Start != default(DateTime))
-                builder.Append($"Start = {e.Start}\r\n");
-            if (e.End != default(DateTime))
-                builder.Append($"End = {e.End}\r\n");
-            if (e.FirstReminder != default(TimeSpan))
-                builder.Append($"First Reminder = {e.FirstReminder}\r\n");
-            if (e.SecondReminder != default(TimeSpan))
-                builder.Append($"Second Reminder = {e.SecondReminder}\r\n");
-            return  builder.ToString();
+            EventStorage = eventStorage;
         }
         public override IResponse Execute(IRequest message)
         {
@@ -52,14 +31,13 @@ namespace EventListSession
                 var e = EventStorage
                 .GetAll(x => x.Creator.TelegramId == author.TelegramId)
                 .FirstOrDefault(x => x.Id == id);
-                if (e == null)
-                    return new TextResponse($"event with id {id} not found", ResponseStatus.Expect);
-                return new TextResponse(EventToString(e),ResponseStatus.Expect);
+                return e == null ? new TextResponse($"event with id {id} not found", ResponseStatus.Expect) : 
+                    new TextResponse(e.ToString(),ResponseStatus.Expect);
             }
             var events = EventStorage
                 .GetAll(x => x.Creator.TelegramId == author.TelegramId).ToArray();
             if (events.Length == 0)
-                return new TextResponse("you haven't events",ResponseStatus.Close);
+                return new TextResponse("You don't have any events",ResponseStatus.Close);
             var resp = new StringBuilder();
             var i = 1;
             foreach (var @event in events)

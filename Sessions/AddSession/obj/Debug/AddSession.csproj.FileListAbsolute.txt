@@ -1,0 +1,10 @@
+E:\Projects\OOP3\EventManager\EventManager\bin\Debug\Plugins\AddSession.dll
+E:\Projects\OOP3\EventManager\EventManager\bin\Debug\Plugins\AddSession.pdb
+E:\Projects\OOP3\EventManager\Sessions\AddSession\obj\Debug\AddSession.csprojResolveAssemblyReference.cache
+E:\Projects\OOP3\EventManager\Sessions\AddSession\obj\Debug\AddSession.dll
+E:\Projects\OOP3\EventManager\Sessions\AddSession\obj\Debug\AddSession.pdb
+C:\Users\Wexxion\Desktop\EventManager\EventManager\bin\Debug\Plugins\AddSession.dll
+C:\Users\Wexxion\Desktop\EventManager\EventManager\bin\Debug\Plugins\AddSession.pdb
+C:\Users\Wexxion\Desktop\EventManager\Sessions\AddSession\obj\Debug\AddSession.csprojResolveAssemblyReference.cache
+C:\Users\Wexxion\Desktop\EventManager\Sessions\AddSession\obj\Debug\AddSession.dll
+C:\Users\Wexxion\Desktop\EventManager\Sessions\AddSession\obj\Debug\AddSession.pdb

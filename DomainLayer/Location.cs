@@ -1,8 +1,6 @@
-﻿using ValueType = TaskManager.RepoLayer.ValueType;
-
-namespace TaskManager.DomainLayer
+﻿namespace DomainLayer
 {
-    public class Location : ValueType
+    public class Location : RepoLayer.ValueType
     {
         public double Latitide { get; }
         public double Longtitude { get; }

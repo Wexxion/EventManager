@@ -1,0 +1,14 @@
+E:\Projects\OOP3\EventManager\DomainLayer\bin\Debug\DomainLayer.dll
+E:\Projects\OOP3\EventManager\DomainLayer\bin\Debug\DomainLayer.pdb
+E:\Projects\OOP3\EventManager\DomainLayer\bin\Debug\RepoLayer.dll
+E:\Projects\OOP3\EventManager\DomainLayer\bin\Debug\RepoLayer.pdb
+E:\Projects\OOP3\EventManager\DomainLayer\obj\Debug\DomainLayer.csprojResolveAssemblyReference.cache
+E:\Projects\OOP3\EventManager\DomainLayer\obj\Debug\DomainLayer.dll
+E:\Projects\OOP3\EventManager\DomainLayer\obj\Debug\DomainLayer.pdb
+E:\Projects\OOP3\EventManager\EventManager\bin\Debug\DomainLayer.dll
+E:\Projects\OOP3\EventManager\EventManager\bin\Debug\DomainLayer.pdb
+C:\Users\Wexxion\Desktop\EventManager\EventManager\bin\Debug\DomainLayer.dll
+C:\Users\Wexxion\Desktop\EventManager\EventManager\bin\Debug\DomainLayer.pdb
+C:\Users\Wexxion\Desktop\EventManager\DomainLayer\obj\Debug\DomainLayer.csprojResolveAssemblyReference.cache
+C:\Users\Wexxion\Desktop\EventManager\DomainLayer\obj\Debug\DomainLayer.dll
+C:\Users\Wexxion\Desktop\EventManager\DomainLayer\obj\Debug\DomainLayer.pdb

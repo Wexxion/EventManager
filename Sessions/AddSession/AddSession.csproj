@@ -42,14 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddEventSession.cs" />
-    <Compile Include="Commands\DescriptionCommand.cs" />
-    <Compile Include="Commands\ExitCommand.cs" />
-    <Compile Include="Commands\FinishTimeCommand.cs" />
-    <Compile Include="Commands\FirstReminderCommand.cs" />
-    <Compile Include="Commands\NameCommand.cs" />
-    <Compile Include="Commands\SaveCommand.cs" />
-    <Compile Include="Commands\SecondReminderCommand.cs" />
-    <Compile Include="Commands\StartTimeComand.cs" />
+    <Compile Include="CustomCommands\SetDateTimeCommand.cs" />
+    <Compile Include="CustomCommands\SetTimeSpanCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

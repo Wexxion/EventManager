@@ -1,0 +1,16 @@
+E:\Projects\OOP3\EventManager\AppLayer\bin\Debug\AppLayer.dll
+E:\Projects\OOP3\EventManager\AppLayer\bin\Debug\AppLayer.pdb
+E:\Projects\OOP3\EventManager\AppLayer\bin\Debug\DomainLayer.pdb
+E:\Projects\OOP3\EventManager\AppLayer\bin\Debug\RepoLayer.pdb
+E:\Projects\OOP3\EventManager\AppLayer\obj\Debug\AppLayer.csprojResolveAssemblyReference.cache
+E:\Projects\OOP3\EventManager\AppLayer\obj\Debug\AppLayer.dll
+E:\Projects\OOP3\EventManager\AppLayer\obj\Debug\AppLayer.pdb
+E:\Projects\OOP3\EventManager\AppLayer\bin\Debug\DomainLayer.dll
+E:\Projects\OOP3\EventManager\AppLayer\bin\Debug\RepoLayer.dll
+E:\Projects\OOP3\EventManager\EventManager\bin\Debug\AppLayer.dll
+E:\Projects\OOP3\EventManager\EventManager\bin\Debug\AppLayer.pdb
+C:\Users\Wexxion\Desktop\EventManager\EventManager\bin\Debug\AppLayer.dll
+C:\Users\Wexxion\Desktop\EventManager\EventManager\bin\Debug\AppLayer.pdb
+C:\Users\Wexxion\Desktop\EventManager\AppLayer\obj\Debug\AppLayer.csprojResolveAssemblyReference.cache
+C:\Users\Wexxion\Desktop\EventManager\AppLayer\obj\Debug\AppLayer.dll
+C:\Users\Wexxion\Desktop\EventManager\AppLayer\obj\Debug\AppLayer.pdb

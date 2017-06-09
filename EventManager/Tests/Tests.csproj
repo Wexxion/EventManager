@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CC58DFC2-5F41-45F1-951F-91389D71892D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Tests</RootNamespace>
+    <AssemblyName>Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MockEventStorage.cs" />
+    <Compile Include="MockPersonsStorage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\AppLayer\AppLayer.csproj">
+      <Project>{a5107fc1-8671-4674-8df9-7c894b8792cd}</Project>
+      <Name>AppLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DomainLayer\DomainLayer.csproj">
+      <Project>{7acc97f8-7b28-4cb4-a823-6c6f97483a9b}</Project>
+      <Name>DomainLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\RepoLayer\RepoLayer.csproj">
+      <Project>{36AA6ED5-2EAC-490C-A2E3-6464B1F4167F}</Project>
+      <Name>RepoLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Sessions\AddSession\AddSession.csproj">
+      <Project>{d335ddbf-b59f-40bf-a94c-041db88a8ce0}</Project>
+      <Name>AddSession</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Sessions\DeleteEventsSession\DeleteEventsSession.csproj">
+      <Project>{11b8774e-c90c-45f6-bc1f-0b009f801c65}</Project>
+      <Name>DeleteEventsSession</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Sessions\EventListSession\EventListSession.csproj">
+      <Project>{52e29623-36c9-41d3-b1f7-cf9edcc1ee48}</Project>
+      <Name>EventListSession</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Sessions\ListSession\ListSession.csproj">
+      <Project>{d7b16a42-48b8-4a6d-add0-4c564616efb4}</Project>
+      <Name>ListSession</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Sessions\LoginSession\LoginSession.csproj">
+      <Project>{809f40b4-4432-46dc-a91c-919e5fbc4db8}</Project>
+      <Name>LoginSession</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\UILayer\UILayer.csproj">
+      <Project>{b0e3c81f-8859-4fcf-9d9c-58f8dd07358f}</Project>
+      <Name>UILayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EventManager.csproj">
+      <Project>{5fe728fa-5abc-4231-a085-b3fdeec2d85d}</Project>
+      <Name>EventManager</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

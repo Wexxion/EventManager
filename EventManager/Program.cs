@@ -1,15 +1,7 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Text;
+using DomainLayer;
 using Ninject;
-using RepoLayer;
-using TaskManager.DomainLayer;
-using TaskManager.RepoLayer;
-using TaskManager.UILayer;
+using UILayer;
 
 namespace TaskManager
 {
@@ -20,10 +12,10 @@ namespace TaskManager
             var config = new Configuration
             {
                 DbName = "storage.db",
-                Token = "token",
+                Token = "389115701:AAGnXQ8Zbdzu9j56B-kwipHfVOw8j2XePpI",
+                PathToPluginsFolder = "Plugins",
                 RemindTimeOut = 1000 * 10
             };
-            StorageFactory.dbName = config.DbName;
             NinjectConfig.Configure(config);
             var bot = NinjectConfig.GetKernel().Get<IMessengerBot>();
             bot.OnRequest += request =>
@@ -36,4 +28,6 @@ namespace TaskManager
             bot.Stop();
         }
     }
+
+    
 }
