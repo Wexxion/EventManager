@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
 using AppLayer;
 using DomainLayer;
@@ -17,8 +19,8 @@ namespace TaskManager
         {
 
             NinjectConfig.Configure(new Configuration(
-                token: "Token", 
-                dbName: "Storage.db", 
+                token: "Token",
+                dbName: "Storage.db",
                 pathToPlugins: "Plugins",
                 remindTimeOut: 10 * 100));
 
@@ -31,6 +33,7 @@ namespace TaskManager
             bot.Start();
             Console.ReadLine();
             bot.Stop();
+
         }
     }
 

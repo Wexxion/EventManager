@@ -21,8 +21,7 @@ namespace TaskManager
             Kernel.Bind<PluginsPath>().ToConstant(config.PathToPluginsFolder);
             Kernel.Bind<IRepository<VEvent>>().To<NoSqlDb<VEvent>>();
             Kernel.Bind<IRepository<Person>>().To<NoSqlDb<Person>>();
-            foreach (var command in Kernel.Get<CommandLoader>().GetCommands())
-                Kernel.Bind<BaseBotSession>().To(command.GetType());
+            Kernel.Bind<ICommandLoader>().To<CommandLoader>();
             Kernel.Bind<IMessengerBot>().To<TelegramMessengerBot>();
         }
         public static IKernel GetKernel()

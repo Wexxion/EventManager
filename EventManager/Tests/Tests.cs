@@ -48,7 +48,7 @@ namespace Tests
             var path = Environment.CurrentDirectory;
             var commandLoader = new CommandLoader(new PluginsPath(path + "\\..\\..\\..\\bin\\Debug\\Plugins"),
                 new MockEventStorage(), new MockPersonsStorage());
-            return new SessionHandler(commandLoader.GetCommands());
+            return new SessionHandler(commandLoader);
         }
 
         private void TestSession(SessionHandler handler, Person person, string requestText, 
@@ -248,6 +248,31 @@ namespace Tests
                 requestText: "back",        //Close session
                 expectedText: "Ok",
                 expectedStatus: ResponseStatus.Abort);
+        }
+
+
+        [TestMethod]
+        public void MultipleRequest()
+        {
+            var user1 = new Person(0,null,null,null);
+            var user2 = new Person(1,null,null,null);
+            var user3 = new Person(3,null,null,null);
+
+            var handler = GetSessionHandler();
+            TestSession(handler,user1,"Add event", "Choose",ResponseStatus.Expect);
+            TestSession(handler,user2,"Add event", "Choose",ResponseStatus.Expect);
+            TestSession(handler,user3,"Add event", "Choose",ResponseStatus.Expect);
+            TestSession(handler, user1, "Name", "Set event name👇", ResponseStatus.Expect);
+            TestSession(handler, user2, "Name", "Set event name👇", ResponseStatus.Expect);
+            TestSession(handler, user3, "Name", "Set event name👇", ResponseStatus.Expect);
+            TestSession(handler, user1, "123", "✅", ResponseStatus.Expect);
+            TestSession(handler, user2, "123", "✅", ResponseStatus.Expect);
+            TestSession(handler, user3, "123", "✅", ResponseStatus.Expect);
+            TestSession(handler, user1, "Save", "✅", ResponseStatus.Abort);
+            TestSession(handler, user2, "Save", "✅", ResponseStatus.Abort);
+            TestSession(handler, user3, "Save", "✅", ResponseStatus.Abort);
+
+
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace DomainLayer
+﻿using System;
+
+namespace DomainLayer
 {
     public class Location : RepoLayer.ValueType
     {

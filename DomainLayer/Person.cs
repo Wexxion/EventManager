@@ -1,4 +1,5 @@
-﻿using RepoLayer;
+﻿using System;
+using RepoLayer;
 
 namespace DomainLayer
 {
