@@ -44,6 +44,7 @@
     <Compile Include="BaseRequest.cs" />
     <Compile Include="Emoji.cs" />
     <Compile Include="Reminder.cs" />
+    <Compile Include="ReminderTimeOut.cs" />
     <Compile Include="RemindResponse.cs" />
     <Compile Include="TextResponse.cs" />
     <Compile Include="ButtonResponse.cs" />

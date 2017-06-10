@@ -15,10 +15,10 @@ namespace AppLayer
         private IRepository<VEvent> EventStorage { get; }
         private readonly int timeInterval;
         private TimeSpan dTime;
-        public Reminder(int timeInterval, IRepository<VEvent> eventStorage)
+        public Reminder(ReminderTimeOut timeInterval, IRepository<VEvent> eventStorage)
         {
-            this.timeInterval = timeInterval;
-            dTime = TimeSpan.FromMilliseconds(timeInterval);
+            this.timeInterval = timeInterval.TimeOut;
+            dTime = TimeSpan.FromMilliseconds(timeInterval.TimeOut);
             EventStorage = eventStorage;
             Timer = new Timer(state => Remind(() => DateTime.Now));
         }

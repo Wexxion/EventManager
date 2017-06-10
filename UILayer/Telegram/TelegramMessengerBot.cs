@@ -17,10 +17,10 @@ namespace UILayer.Telegram
         private Reminder Reminder { get; }
         public event Action<IRequest> OnRequest;
         public event Action<Exception> OnError;
-        public TelegramMessengerBot(TelegramBotClient bot, SessionHandler sessionHandler, Reminder reminder, TelegramResponseHandler responseHandler)
+        public TelegramMessengerBot(ApiToken token, SessionHandler sessionHandler, Reminder reminder, TelegramResponseHandler responseHandler)
         {
             Reminder = reminder;
-            Bot = bot;
+            Bot = new TelegramBotClient(token.Token);
             SessionHandler = sessionHandler;
             ResponseHandler = responseHandler;
         }

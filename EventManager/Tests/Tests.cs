@@ -21,7 +21,7 @@ namespace Tests
             testEvent.SetFirstReminder(new TimeSpan(1, 0, 0));
 
             var remindSuccess = false;
-            var reminder = new Reminder(1000 * 10, eventStorage);
+            var reminder = new Reminder(new ReminderTimeOut(1000 * 10), eventStorage);
             reminder.OnRemind += response => remindSuccess = true;
 
             //Don't remind at 10:00
@@ -46,7 +46,7 @@ namespace Tests
         private SessionHandler GetSessionHandler()
         {
             var path = Environment.CurrentDirectory;
-            var commandLoader = new CommandLoader(path + "\\..\\..\\..\\bin\\Debug\\Plugins",
+            var commandLoader = new CommandLoader(new PluginsPath(path + "\\..\\..\\..\\bin\\Debug\\Plugins"),
                 new MockEventStorage(), new MockPersonsStorage());
             return new SessionHandler(commandLoader.GetCommands());
         }

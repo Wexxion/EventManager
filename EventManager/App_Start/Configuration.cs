@@ -1,14 +1,25 @@
 ﻿using System.IO;
 using System.Xml.Serialization;
+using AppLayer;
+using RepoLayer;
+using UILayer;
 
 namespace TaskManager
 {
     public class Configuration
     {
-        public string Token { get; set; }
-        public string DbName { get; set; }
-        public int RemindTimeOut { get; set; }
-        public string PathToPluginsFolder { get; set; }
+        public Configuration(string token, string dbName, string pathToPlugins, int remindTimeOut)
+        {
+            Token = new ApiToken(token);
+            Db = new DbInfo(dbName);
+            PathToPluginsFolder = new PluginsPath(pathToPlugins);
+            RemindTimeOut = new ReminderTimeOut(remindTimeOut);
+        }
+
+        public ApiToken Token { get; set; }
+        public DbInfo Db { get; set; }
+        public ReminderTimeOut RemindTimeOut { get; set; }
+        public PluginsPath PathToPluginsFolder { get; set; }
         public static Configuration Load(string confPath)
         {
             var ser = new XmlSerializer(typeof(Configuration));

@@ -10,9 +10,10 @@ namespace RepoLayer
     {
         private readonly LiteCollection<TEntity> collection;
 
-        public NoSqlDb(LiteDatabase db)
+        public NoSqlDb(DbInfo db)
         {
-            collection = db.GetCollection<TEntity>();
+            collection = new LiteDatabase(db.Name, null)
+                .GetCollection<TEntity>();
         }
         public void Add(TEntity entity)
         {

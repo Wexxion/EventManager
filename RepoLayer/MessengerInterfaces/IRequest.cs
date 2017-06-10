@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TaskManager.RepoLayer.MessengerInterfaces
+namespace RepoLayer.MessengerInterfaces
 {
     public interface IRequest
     {

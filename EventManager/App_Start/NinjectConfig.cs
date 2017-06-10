@@ -15,15 +15,14 @@ namespace TaskManager
         private static readonly IKernel Kernel = new StandardKernel();
         public static void Configure(Configuration config)
         {
-            Kernel.Bind<LiteDatabase>().ToConstructor(x => new LiteDatabase(config.DbName,null));
+            Kernel.Bind<ApiToken>().ToConstant(config.Token);
+            Kernel.Bind<DbInfo>().ToConstant(config.Db);
+            Kernel.Bind<ReminderTimeOut>().ToConstant(config.RemindTimeOut);
+            Kernel.Bind<PluginsPath>().ToConstant(config.PathToPluginsFolder);
             Kernel.Bind<IRepository<VEvent>>().To<NoSqlDb<VEvent>>();
             Kernel.Bind<IRepository<Person>>().To<NoSqlDb<Person>>();
-            foreach (var command in new CommandLoader(config.PathToPluginsFolder,
-                Kernel.Get<IRepository<VEvent>>(),
-                Kernel.Get<IRepository<Person>>()).GetCommands())
+            foreach (var command in Kernel.Get<CommandLoader>().GetCommands())
                 Kernel.Bind<BaseBotSession>().To(command.GetType());
-            Kernel.Bind<Reminder>().ToConstructor(x => new Reminder(config.RemindTimeOut, Kernel.Get<IRepository<VEvent>>()));
-            Kernel.Bind<TelegramBotClient>().ToConstructor(x => new TelegramBotClient(config.Token));
             Kernel.Bind<IMessengerBot>().To<TelegramMessengerBot>();
         }
         public static IKernel GetKernel()

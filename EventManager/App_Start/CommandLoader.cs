@@ -13,10 +13,10 @@ namespace TaskManager
         [ImportMany(typeof(BaseBotSession))]
         private IEnumerable<BaseBotSession> Commands { get; set; }
 
-        public CommandLoader(string pathToPlugins, IRepository<VEvent> eventStorage, IRepository<Person> personStorage)
+        public CommandLoader(PluginsPath plugins, IRepository<VEvent> eventStorage, IRepository<Person> personStorage)
         {
             var catalog = new AggregateCatalog();
-            var path = Path.Combine(Directory.GetCurrentDirectory(), pathToPlugins);
+            var path = Path.Combine(Directory.GetCurrentDirectory(), plugins.Path);
             catalog.Catalogs.Add(new DirectoryCatalog(path));
             var container = new CompositionContainer(catalog);
             container.ComposeExportedValue("PersonStorage", personStorage);
@@ -28,5 +28,15 @@ namespace TaskManager
         {
             return Commands;
         }
+    }
+
+    public class PluginsPath
+    {
+        public PluginsPath(string path)
+        {
+            Path = path;
+        }
+
+        public string Path { get; }
     }
 }
